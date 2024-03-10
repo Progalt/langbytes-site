@@ -1,113 +1,96 @@
-import Image from "next/image";
+"use client";
+
+import { BookPage } from "./Components/Books";
+import { Post, PostQuote, PostSection, PostThumbnail } from "./Components/Post";
+import SignInEmailPassword from "./Components/SignIn";
+
+
+
 
 export default function Home() {
+
+  const onClick = () => {
+    getBookInfo("0930289234")
+    .then(bookInfo => {
+        console.log("Book Title:", bookInfo.title);
+        console.log("Author(s):", bookInfo.authors ? bookInfo.authors.join(", ") : "Unknown");
+        console.log("Publish Date:", bookInfo.publish_date);
+        console.log("Number of Pages:", bookInfo.number_of_pages);
+        console.log("Subjects:", bookInfo.subjects ? bookInfo.subjects.join(", ") : "Unknown");
+        
+    })
+    .catch(error => console.error('Error:', error));
+  }
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
+    <main className="p-7">
+        <Post 
+          title="Writing a basic blog page component" 
+          topic="Blog" publishDate="March 7, 2024"
+          author="Henry Gronow"
+          readTime="10 mins"
+        >
+          <PostSection header="Main">
+            <PostQuote speaker="Alex Woodroof">Hello, Where Am I?</PostQuote>
+            <PostThumbnail 
+              onClick={onClick }
+              title="Very long page blog title to test the limits of the box" 
+              topic="blog" 
+              date="March 7, 2024" 
+              author="Henry Gronow"
             />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent feugiat velit sit amet diam dictum pulvinar. Fusce sed accumsan augue. Quisque nisi libero, venenatis in cursus sit amet, malesuada eu tellus. Vestibulum sit amet augue nisl. Sed in luctus justo. Nam sit amet sodales elit. Phasellus et laoreet eros. Duis accumsan condimentum sapien, eget commodo eros. Vivamus pulvinar bibendum nibh, ac ullamcorper justo hendrerit eu. Donec et ex tortor. Fusce laoreet vehicula quam, ornare maximus ex commodo in. Maecenas egestas, enim in iaculis pellentesque, ex metus malesuada sem, ut dapibus ipsum magna id quam. Duis vel est nec tellus suscipit posuere. Phasellus scelerisque dictum purus, vel placerat neque pulvinar ac. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin maximus blandit diam, eget ultricies tortor cursus non. 
+            </p>
+            <p>
+              Nullam et lorem quis massa sollicitudin venenatis eget sed urna. Donec hendrerit, enim quis efficitur cursus, libero lacus euismod eros, id viverra tortor odio sit amet magna. Nunc bibendum posuere ipsum non aliquam. Nulla aliquet dictum est, eu consequat ante gravida sit amet. Integer pharetra efficitur lobortis. Suspendisse luctus libero vel est congue, quis aliquam tortor cursus. Praesent mattis molestie commodo. Nunc magna arcu, euismod eu lobortis in, egestas ut massa. Sed hendrerit bibendum neque ut mollis. Donec quis orci tristique, fringilla orci id, auctor nulla. Sed aliquet tincidunt nisl, ac blandit purus hendrerit at. Fusce at nibh urna. 
+            </p>
+            <p>
+              Sed in lacinia nisl, ac bibendum massa. Morbi pretium odio luctus vehicula ultrices. Morbi dignissim massa ut dignissim rhoncus. Morbi nec luctus orci. Nullam ac vulputate libero. Aenean enim enim, ultricies nec congue non, condimentum at mi. Maecenas libero tortor, tristique sit amet aliquet vel, maximus et ligula. Praesent malesuada ut purus eget vehicula. 
+            </p>
+            <p>
+              In et risus porttitor, viverra ligula id, malesuada metus. Sed dolor ipsum, elementum in porttitor quis, bibendum nec arcu. Sed elementum blandit massa nec iaculis. Vivamus rhoncus sodales nulla quis egestas. Ut aliquet venenatis mollis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec vulputate viverra tempor. 
+            </p>
+            <PostQuote speaker="Alex Woodroof">Drop a "💯" if thats awesome</PostQuote>
+            <p>
+              Vivamus euismod nibh id lorem posuere posuere. Nulla imperdiet pellentesque mauris ac posuere. Aliquam gravida magna vel tortor efficitur imperdiet. Mauris iaculis aliquet est, in venenatis nulla vehicula quis. Nunc in magna varius, aliquam magna nec, eleifend ex. Maecenas turpis nulla, consectetur sed nisl laoreet, bibendum faucibus libero. Aliquam quis odio ut lorem tincidunt suscipit eget vel ante. Fusce ac fermentum nibh. Duis ut volutpat metus. Donec facilisis gravida ipsum, eu congue magna suscipit at. Nam vitae est tincidunt, pretium eros quis, aliquet felis. 
+            </p>
+          </PostSection>
+          <PostSection header="Hello">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent feugiat velit sit amet diam dictum pulvinar. Fusce sed accumsan augue. Quisque nisi libero, venenatis in cursus sit amet, malesuada eu tellus. Vestibulum sit amet augue nisl. Sed in luctus justo. Nam sit amet sodales elit. Phasellus et laoreet eros. Duis accumsan condimentum sapien, eget commodo eros. Vivamus pulvinar bibendum nibh, ac ullamcorper justo hendrerit eu. Donec et ex tortor. Fusce laoreet vehicula quam, ornare maximus ex commodo in. Maecenas egestas, enim in iaculis pellentesque, ex metus malesuada sem, ut dapibus ipsum magna id quam. Duis vel est nec tellus suscipit posuere. Phasellus scelerisque dictum purus, vel placerat neque pulvinar ac. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin maximus blandit diam, eget ultricies tortor cursus non. 
+            </p>
+            <p>
+              Nullam et lorem quis massa sollicitudin venenatis eget sed urna. Donec hendrerit, enim quis efficitur cursus, libero lacus euismod eros, id viverra tortor odio sit amet magna. Nunc bibendum posuere ipsum non aliquam. Nulla aliquet dictum est, eu consequat ante gravida sit amet. Integer pharetra efficitur lobortis. Suspendisse luctus libero vel est congue, quis aliquam tortor cursus. Praesent mattis molestie commodo. Nunc magna arcu, euismod eu lobortis in, egestas ut massa. Sed hendrerit bibendum neque ut mollis. Donec quis orci tristique, fringilla orci id, auctor nulla. Sed aliquet tincidunt nisl, ac blandit purus hendrerit at. Fusce at nibh urna. 
+            </p>
+            <p>
+              Sed in lacinia nisl, ac bibendum massa. Morbi pretium odio luctus vehicula ultrices. Morbi dignissim massa ut dignissim rhoncus. Morbi nec luctus orci. Nullam ac vulputate libero. Aenean enim enim, ultricies nec congue non, condimentum at mi. Maecenas libero tortor, tristique sit amet aliquet vel, maximus et ligula. Praesent malesuada ut purus eget vehicula. 
+            </p>
+            <p>
+              In et risus porttitor, viverra ligula id, malesuada metus. Sed dolor ipsum, elementum in porttitor quis, bibendum nec arcu. Sed elementum blandit massa nec iaculis. Vivamus rhoncus sodales nulla quis egestas. Ut aliquet venenatis mollis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec vulputate viverra tempor. 
+            </p>
+            <p>
+              Vivamus euismod nibh id lorem posuere posuere. Nulla imperdiet pellentesque mauris ac posuere. Aliquam gravida magna vel tortor efficitur imperdiet. Mauris iaculis aliquet est, in venenatis nulla vehicula quis. Nunc in magna varius, aliquam magna nec, eleifend ex. Maecenas turpis nulla, consectetur sed nisl laoreet, bibendum faucibus libero. Aliquam quis odio ut lorem tincidunt suscipit eget vel ante. Fusce ac fermentum nibh. Duis ut volutpat metus. Donec facilisis gravida ipsum, eu congue magna suscipit at. Nam vitae est tincidunt, pretium eros quis, aliquet felis. 
+            </p>
+          </PostSection>
+          <PostSection header="Rahh">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent feugiat velit sit amet diam dictum pulvinar. Fusce sed accumsan augue. Quisque nisi libero, venenatis in cursus sit amet, malesuada eu tellus. Vestibulum sit amet augue nisl. Sed in luctus justo. Nam sit amet sodales elit. Phasellus et laoreet eros. Duis accumsan condimentum sapien, eget commodo eros. Vivamus pulvinar bibendum nibh, ac ullamcorper justo hendrerit eu. Donec et ex tortor. Fusce laoreet vehicula quam, ornare maximus ex commodo in. Maecenas egestas, enim in iaculis pellentesque, ex metus malesuada sem, ut dapibus ipsum magna id quam. Duis vel est nec tellus suscipit posuere. Phasellus scelerisque dictum purus, vel placerat neque pulvinar ac. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin maximus blandit diam, eget ultricies tortor cursus non. 
+            </p>
+            <p>
+              Nullam et lorem quis massa sollicitudin venenatis eget sed urna. Donec hendrerit, enim quis efficitur cursus, libero lacus euismod eros, id viverra tortor odio sit amet magna. Nunc bibendum posuere ipsum non aliquam. Nulla aliquet dictum est, eu consequat ante gravida sit amet. Integer pharetra efficitur lobortis. Suspendisse luctus libero vel est congue, quis aliquam tortor cursus. Praesent mattis molestie commodo. Nunc magna arcu, euismod eu lobortis in, egestas ut massa. Sed hendrerit bibendum neque ut mollis. Donec quis orci tristique, fringilla orci id, auctor nulla. Sed aliquet tincidunt nisl, ac blandit purus hendrerit at. Fusce at nibh urna. 
+            </p>
+            <p>
+              Sed in lacinia nisl, ac bibendum massa. Morbi pretium odio luctus vehicula ultrices. Morbi dignissim massa ut dignissim rhoncus. Morbi nec luctus orci. Nullam ac vulputate libero. Aenean enim enim, ultricies nec congue non, condimentum at mi. Maecenas libero tortor, tristique sit amet aliquet vel, maximus et ligula. Praesent malesuada ut purus eget vehicula. 
+            </p>
+            <p>
+              In et risus porttitor, viverra ligula id, malesuada metus. Sed dolor ipsum, elementum in porttitor quis, bibendum nec arcu. Sed elementum blandit massa nec iaculis. Vivamus rhoncus sodales nulla quis egestas. Ut aliquet venenatis mollis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec vulputate viverra tempor. 
+            </p>
+            <p>
+              Vivamus euismod nibh id lorem posuere posuere. Nulla imperdiet pellentesque mauris ac posuere. Aliquam gravida magna vel tortor efficitur imperdiet. Mauris iaculis aliquet est, in venenatis nulla vehicula quis. Nunc in magna varius, aliquam magna nec, eleifend ex. Maecenas turpis nulla, consectetur sed nisl laoreet, bibendum faucibus libero. Aliquam quis odio ut lorem tincidunt suscipit eget vel ante. Fusce ac fermentum nibh. Duis ut volutpat metus. Donec facilisis gravida ipsum, eu congue magna suscipit at. Nam vitae est tincidunt, pretium eros quis, aliquet felis. 
+            </p>
+          </PostSection>
+        </Post>
     </main>
   );
 }
