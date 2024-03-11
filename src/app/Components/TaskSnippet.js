@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
+import { FaRegCopy } from "react-icons/fa";
 
 function LanguageButton({ name, setSelectedLanguage, selectedLang }) {
     return (
@@ -38,6 +39,20 @@ squareList list = map (^2) list
         `
       };
 
+    const questionText = "Write a function that returns the square of each element in an array.";
+    const input = "[2, 4, 8]";
+    const output = "[4, 16, 64]";
+
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(input)
+        .then(() => {
+            console.log("Copied inputs to clipboard: ", input);
+        })
+        .catch((err) => {
+            console.log("Failed to copy inputs to clipboard: ", input);
+        });
+    }
+
     const revealAnswer = () => {
         setIsRevealed(true);
       };
@@ -47,15 +62,26 @@ squareList list = map (^2) list
         style={{
           }}>
             <p className="font-light text-xl mb-3">
-                Write a function that returns the square of each element in an array.
+                {questionText}
             </p>
             <hr className="border border-slate-800 mb-2"></hr>
             <p className="font-light text-lg">Input: </p>
-            <code>{"[2, 4, 8]"}</code>
+            <div className="flex flex-row justify-between items-center">
+                <code>{input}</code>
+                <button className="flex-shrink-0 text-xl text-white" onClick={copyToClipboard}>
+                    <FaRegCopy/>
+                </button>
+            </div>
             <p className="font-light text-lg">Output: </p>
-            <code>{"[4, 16, 64]"}</code>
+            <code>{output}</code>
             <br />
-            { !isRevealed && <button onClick={revealAnswer} >Reveal Answer</button> } 
+            <div className="flex justify-end">
+            { !isRevealed && 
+                <button onClick={revealAnswer} 
+                className="font-light mt-4 px-3 py-1 border-slate-800 border-2 rounded-lg hover:shadow-[0_0px_20px_0px] hover:shadow-indigo-500/50 transition duration-300">Reveal Answer</button> 
+            } 
+            </div>
+            
             { isRevealed && <div className="mt-4 ">
                 <div className="flex flex-row">
                     {Object.keys(codeSnippets).map((lang, index) => (
