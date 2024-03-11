@@ -4,6 +4,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 import { FaRegCopy } from "react-icons/fa";
+import { MdFavoriteBorder, MdFavorite, MdOutlinePlaylistAdd   } from "react-icons/md";
 
 function LanguageButton({ name, setSelectedLanguage, selectedLang }) {
     return (
@@ -22,6 +23,7 @@ export function TaskSnippet() {
 
     const [isRevealed, setIsRevealed] = useState(false);
     const [selectedLanguage, setSelectedLanguage] = useState("Python");
+    const [isFavourited, setFavourited] = useState(false);
 
     const codeSnippets = {
         'Python': `
@@ -42,6 +44,7 @@ squareList list = map (^2) list
     const questionText = "Write a function that returns the square of each element in an array.";
     const input = "[2, 4, 8]";
     const output = "[4, 16, 64]";
+    const difficulty = "Easy"
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(input)
@@ -64,11 +67,27 @@ squareList list = map (^2) list
             <p className="font-light text-xl mb-3">
                 {questionText}
             </p>
+            <div className="flex flex-row justify-between items-center mb-2">
+                <div className="px-4 border-2 border-slate-800 rounded-full">
+                    {difficulty}
+                </div>
+                <div className="flex-shrink-0 text-2xl">
+                    <button className="mr-4"
+                    onClick={() => {}}>
+                        <MdOutlinePlaylistAdd className="text-white hover:text-indigo-500 transition-all duration-100"/>
+                    </button>
+                    <button
+                    onClick={() => { setFavourited(!isFavourited); }}>
+                        { !isFavourited && <MdFavoriteBorder className="text-white hover:text-indigo-500 transition-all duration-100" /> } 
+                        { isFavourited && <MdFavorite className="text-indigo-500" /> }
+                    </button>
+                </div>
+            </div>
             <hr className="border border-slate-800 mb-2"></hr>
             <p className="font-light text-lg">Input: </p>
             <div className="flex flex-row justify-between items-center">
                 <code>{input}</code>
-                <button className="flex-shrink-0 text-xl text-white" onClick={copyToClipboard}>
+                <button className="flex-shrink-0 text-xl text-white hover:text-indigo-500 transition-all duration-100" onClick={copyToClipboard}>
                     <FaRegCopy/>
                 </button>
             </div>
