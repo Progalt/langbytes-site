@@ -1,4 +1,4 @@
-
+"use client";
 import { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -17,6 +17,7 @@ function LanguageButton({ name, setSelectedLanguage, selectedLang }) {
 }
 
 export function TaskSnippet() {
+
 
     const [isRevealed, setIsRevealed] = useState(false);
     const [selectedLanguage, setSelectedLanguage] = useState("Python");
@@ -42,7 +43,7 @@ squareList list = map (^2) list
       };
 
     return (
-        <div className={`shadow-[0_0px_60px_0px] shadow-indigo-500/20 border-2 border-slate-800 w-[60%] rounded-lg p-4 overflow-hidden transition-height duration-500 ease-in-out`}
+        <section className={`shadow-[0_0px_60px_0px] shadow-indigo-500/20 border-2 border-slate-800 w-full rounded-lg p-4 overflow-hidden`}
         style={{
           }}>
             <p className="font-light text-xl mb-3">
@@ -56,23 +57,24 @@ squareList list = map (^2) list
             <br />
             { !isRevealed && <button onClick={revealAnswer} >Reveal Answer</button> } 
             { isRevealed && <div className="mt-4 ">
+                <div className="flex flex-row">
+                    {Object.keys(codeSnippets).map((lang, index) => (
+                        <LanguageButton
+                        key={index}
+                        name={lang}
+                        selectedLang={selectedLanguage}
+                        setSelectedLanguage={setSelectedLanguage}
+                        />
+                    ))}
+                </div>
                 <SyntaxHighlighter language={selectedLanguage.toLowerCase()} style={dracula}>
                     {codeSnippets[selectedLanguage].trim()}
                 </SyntaxHighlighter>
 
-                <div className="flex flex-row">
-                {Object.keys(codeSnippets).map((lang, index) => (
-                    <LanguageButton
-                    key={index}
-                    name={lang}
-                    selectedLang={selectedLanguage}
-                    setSelectedLanguage={setSelectedLanguage}
-                    />
-                ))}
-                </div>
+               
 
             </div> } 
             
-        </div>
+        </section>
     );
 }
