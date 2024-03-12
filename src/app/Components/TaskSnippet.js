@@ -74,7 +74,7 @@ export function TaskSnippet({ id, difficulty }) {
         }
 
         if (cachedID != id) {
-            setIsRevealed(false);
+            
             setCachedID(id);
 
             // We also want to then load the question from the db 
@@ -85,6 +85,7 @@ export function TaskSnippet({ id, difficulty }) {
     }, [id, cachedID, selectedLanguage]);
 
     useEffect(() => {
+        setIsRevealed(false);
         console.log(question);
     }, [question]);
 
@@ -118,7 +119,7 @@ export function TaskSnippet({ id, difficulty }) {
     };
 
     return (
-        <section className={`shadow-[0_0px_60px_0px] shadow-indigo-500/20 border-2 border-slate-800 w-full rounded-lg p-4 overflow-hidden`}
+        <section className={`bg-[#13131d] shadow-[0_0px_200px_30px] shadow-indigo-500/20 border-2 border-slate-800 w-full rounded-lg p-4 overflow-hidden`}
         style={{
           }}>
             <p className="font-light text-xl mb-3">
@@ -153,8 +154,15 @@ export function TaskSnippet({ id, difficulty }) {
             <br />
             <div className="flex justify-end">
             { !isRevealed && 
-                <button onClick={revealAnswer} 
-                className="font-light mt-4 px-3 py-1 border-slate-800 border-2 rounded-lg hover:shadow-[0_0px_20px_0px] hover:shadow-indigo-500/50 transition duration-200">Reveal Answer</button> 
+               <button 
+               onClick={() => {
+                    revealAnswer();
+               }}
+               className="shadow-[0_0px_30px_0] shadow-indigo-500/50 hover:shadow-red-500/50 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold rounded-lg p-[2px] transform transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-500 hover:via-red-500 hover:to-indigo-500">
+                 <span className="flex w-full bg-gray-900 text-white rounded-lg p-2 px-4">
+                   Reveal Answer
+                 </span>
+               </button>
             } 
             </div>
             

@@ -54,7 +54,37 @@ export default function Home() {
     setDifficulty(difficulty);
   }
 
- 
+  async function getNewID() {
+    const { data, err } = await supabase
+    .from("question")
+    .select("*") 
+    .eq("difficulty", difficulty);
+
+    let idx = getRandomInteger(1, data.length);
+
+    let id = data[idx - 1].id; 
+
+    if (id == questionId) {
+      if (id < questionCount) {
+        id++;
+      }
+      else {
+        id--; 
+      }
+    }
+
+    console.log(id);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set("id", id);
+    urlParams.set("difficulty", difficulty);
+    
+    const newURL = window.location.pathname + '?' + urlParams.toString();
+    window.history.pushState({ path: newURL }, '', newURL);
+
+    setQuestionID(id);
+    setShowQuestion(true);
+  }
 
   return (
       <main className="p-5 w-full h-screen flex flex-col justify-center items-center">
@@ -65,28 +95,7 @@ export default function Home() {
               <button
               className="mt-4"
               onClick={() => {
-                let id = getRandomInteger(1, questionCount);
-
-                if (id == questionId) {
-                  if (id < questionCount) {
-                    id--;
-                  }
-                  else {
-                    id++; 
-                  }
-                }
-                // while (id == questionId) {
-                //   id = getRandomInteger(1, questionCount); 
-                // }
-                const urlParams = new URLSearchParams(window.location.search);
-                urlParams.set("id", id);
-                
-                const newURL = window.location.pathname + '?' + urlParams.toString();
-                window.history.pushState({ path: newURL }, '', newURL);
-
-                setQuestionID(id);
-
-                //window.location.search = urlParams.toString();
+                getNewID();
               }}
               >
                 New Question
@@ -107,13 +116,7 @@ export default function Home() {
                 <div className="flex flex-row justify-center items-center">
                 <button 
                 onClick={() => {
-                  // we want to get a random int 
-                  let id = getRandomInteger(1, questionCount);
-                  const urlParams = new URLSearchParams();
-                  urlParams.set("id", id);
-                  urlParams.set("difficulty", difficulty);
-
-                  window.location.search = urlParams.toString();
+                  getNewID();
                 }}
                 className="shadow-[0_0px_30px_0] shadow-indigo-500/50 hover:shadow-red-500/50 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold rounded-full p-[2px] transform transition-all duration-300 hover:scale-110 hover:bg-gradient-to-r hover:from-purple-500 hover:via-red-500 hover:to-indigo-500">
                   <span className="flex w-full bg-gray-900 text-white rounded-full p-2 px-4">
@@ -132,7 +135,12 @@ export default function Home() {
           </div>
         </div> */}
 
-        <div className=""></div>
+        <footer className="absolute bottom-5">
+          <div className="flex flex-row justify-center items-center">
+            <p className="text-slate-500">You can view the source</p>
+            <a href="https://github.com/Progalt/portfolio-react" className="ml-1 text-indigo-500 text-glow">here</a>
+          </div>
+        </footer>
       </main>
   );
 }

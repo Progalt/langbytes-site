@@ -13,6 +13,8 @@
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 20, 20, 31;
     --background-end-rgb: 10, 10, 15;
+
+    --bg-grid: 30, 41, 59;
   }
 }
 
@@ -30,8 +32,13 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  .text-glow {
+    text-shadow: 0 0 10px #6366f1 , 0 0 20px #6366f1 , 0 0 40px #6366f1 , 0 0 80px #6366f1 , 0 0 120px #6366f1 ;
+  }
 }
 
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px white inset !important;
 }
+
