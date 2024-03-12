@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { TaskSnippet, supabase } from "./Components/TaskSnippet";
 import { IoPerson } from "react-icons/io5";
 import { DifficultyButton } from "./Components/DifficultyButton";
+import { Modal } from "./Components/Modal";
 
 function getRandomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -131,7 +132,9 @@ export default function Home() {
 
                 </div>
               }
+
             </div>
+            
           }
         </div>
         {/* <div className="absolute top-0 right-0 mt-4 mr-10">
