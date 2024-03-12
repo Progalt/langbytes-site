@@ -7,6 +7,7 @@ import { FaRegCopy } from "react-icons/fa";
 import { MdFavoriteBorder, MdFavorite, MdOutlinePlaylistAdd   } from "react-icons/md";
 
 import { createClient } from '@supabase/supabase-js'
+import { Tooltip } from './Tooltip';
 
 export const supabase = createClient("https://qlfmizzkgfwibxvrfoja.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFsZm1penprZ2Z3aWJ4dnJmb2phIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTAxOTEwMDgsImV4cCI6MjAyNTc2NzAwOH0.74EX28xtvNqxzk_DfXHTEJbHlkhZDWsztThPc_1hG48")
 
@@ -119,7 +120,7 @@ export function TaskSnippet({ id, difficulty }) {
     };
 
     return (
-        <section className={`bg-[#13131d] shadow-[0_0px_200px_30px] shadow-indigo-500/20 border-2 border-slate-800 w-full rounded-lg p-4 overflow-hidden`}
+        <section className={`bg-[#13131d] shadow-[0_0px_200px_30px] shadow-indigo-500/20 border-2 border-slate-800 w-full rounded-lg p-4`}
         style={{
           }}>
             <p className="font-light text-xl mb-3">
@@ -129,25 +130,31 @@ export function TaskSnippet({ id, difficulty }) {
                 <div className="px-4 border-2 border-slate-800 rounded-full">
                     {difficulty}
                 </div>
-                <div className="flex-shrink-0 text-2xl">
-                    <button className="mr-4"
-                    onClick={() => {}}>
-                        <MdOutlinePlaylistAdd className="text-white hover:text-indigo-500 transition-all duration-200"/>
-                    </button>
-                    <button
-                    onClick={favourite}>
-                        { !isFavourited && <MdFavoriteBorder className="text-white hover:text-indigo-500 transition-all duration-200" /> } 
-                        { isFavourited && <MdFavorite className="text-indigo-500" /> }
-                    </button>
+                <div className="flex flex-shrink-0 text-2xl">
+                    <Tooltip text="Add to list">
+                        <button className="mr-4"
+                        onClick={() => {}}>
+                            <MdOutlinePlaylistAdd className="text-white hover:text-indigo-500 transition-all duration-200"/>
+                        </button>
+                    </Tooltip>
+                    <Tooltip text="Favourite">
+                        <button
+                        onClick={favourite}>
+                            { !isFavourited && <MdFavoriteBorder className="text-white hover:text-indigo-500 transition-all duration-200" /> } 
+                            { isFavourited && <MdFavorite className="text-indigo-500" /> }
+                        </button>
+                    </Tooltip>
                 </div>
             </div>
             <hr className="border border-slate-800 mb-2"></hr>
             <p className="font-light text-lg">Input: </p>
             <div className="flex flex-row justify-between items-center">
                 <code>{question.input}</code>
-                <button className="flex-shrink-0 text-xl text-white hover:text-indigo-500 transition-all duration-100" onClick={copyToClipboard}>
-                    <FaRegCopy/>
-                </button>
+                <Tooltip text="Copy inputs">
+                    <button className="flex-shrink-0 text-xl text-white hover:text-indigo-500 transition-all duration-100" onClick={copyToClipboard}>
+                        <FaRegCopy/>
+                    </button>
+                </Tooltip>
             </div>
             <p className="font-light text-lg">Output: </p>
             <code>{question.output}</code>

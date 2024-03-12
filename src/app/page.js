@@ -73,6 +73,10 @@ export default function Home() {
       }
     }
 
+    if (id == 0) {
+      id = 1; 
+    }
+
     console.log(id);
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -90,16 +94,17 @@ export default function Home() {
       <main className="p-5 w-full h-screen flex flex-col justify-center items-center">
         <div className="w-[60%]">
           { showQuestion && 
-            <div className="flex flex-col">
+            <div className="flex flex-col justify-center items-center">
               <TaskSnippet id={questionId} difficulty={difficulty} />
               <button
-              className="mt-4"
-              onClick={() => {
-                getNewID();
-              }}
-              >
-                New Question
-              </button>
+                onClick={() => {
+                  getNewID();
+                }}
+                className="mt-4 shadow-[0_0px_30px_0] shadow-indigo-500/50 hover:shadow-red-500/50 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold rounded-full p-[2px] transform transition-all duration-300 hover:scale-110 hover:bg-gradient-to-r hover:from-purple-500 hover:via-red-500 hover:to-indigo-500">
+                  <span className="flex w-full bg-gray-900 text-white rounded-full p-2 px-4">
+                    Give me a question
+                  </span>
+                </button>
             </div>
           } 
           {
@@ -138,7 +143,7 @@ export default function Home() {
         <footer className="absolute bottom-5">
           <div className="flex flex-row justify-center items-center">
             <p className="text-slate-500">You can view the source</p>
-            <a href="https://github.com/Progalt/portfolio-react" className="ml-1 text-indigo-500 text-glow">here</a>
+            <a href="https://github.com/Progalt/portfolio-react" className="ml-1 text-indigo-500 text-glow hover:text-white transition-all duration-150">here</a>
           </div>
         </footer>
       </main>
