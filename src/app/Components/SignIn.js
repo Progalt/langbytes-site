@@ -9,7 +9,7 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import React, { useRef, useState } from "react";
 import AnimateHeight from "react-animate-height";
 
-export function PasswordInputBox({onChange, visibiltyToggle, onFocus }) {
+export function PasswordInputBox({onChange, formChange, visibiltyToggle, onFocus }) {
 
     const [showPassword, setShowPassword] = useState(false);
     const passwordRef = useRef(null);
@@ -30,7 +30,8 @@ export function PasswordInputBox({onChange, visibiltyToggle, onFocus }) {
         onFocus(false);
     };
 
-    const handleChange = () => {
+    const handleChange = (event) => {
+        formChange(event);
         onChange(event.target.value);
     }
 
@@ -44,36 +45,87 @@ export function PasswordInputBox({onChange, visibiltyToggle, onFocus }) {
 
     return (
         <>
-            <label htmlFor="userPassword">Password</label>
+            <label htmlFor="password">Password</label>
             <div className="mt-1 mb-5">
-                <input id="userPassword" name="password" ref={passwordRef} type={showPassword ? 'text' : 'password'} minLength="8" placeholder="Password" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur}  required 
-                className={`w-full rounded-lg h-10 outline-2 text-black p-2 pr-12 border-transparent focus:ring-transparent focus:border-transparent focus:outline focus:outline-indigo-500 focus:outline-offset-2`} />
+                <input id="password" name="password" ref={passwordRef} type={showPassword ? 'text' : 'password'} minLength="8" placeholder="Password" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur}  required 
+                className={`w-full rounded-lg h-10 outline-2 text-black p-2 pr-12 border-transparent focus:ring-transparent focus:border-transparent focus:outline focus:outline-indigo-500 focus:outline-offset-2 focus:shadow-[0_0px_30px_0] focus:shadow-indigo-500`} />
                 {visToggle}
             </div>
         </>
     );
 }
 
-export function PhoneNumberInputBox({ handleChange }) {
+export function ConfirmPasswordInputBox({onChange, formChange, visibiltyToggle, onFocus }) {
+
+    const [showPassword, setShowPassword] = useState(false);
+    const passwordRef = useRef(null);
+    const [ passwordsMatch, setPasswordsMatch ] = useState(true);
+
+    const handleTogglePassword = () => {
+        setShowPassword(!showPassword);
+    };
+
+    var visToggle = <></>;
+
+
+    const handleFocus = () => {
+       
+        onFocus(true);
+    };
+
+    const handleBlur = () => {
+        onFocus(false);
+    };
+
+    const handleChange = (event) => {
+        formChange(event);
+        setPasswordsMatch(onChange(event.target.value));
+    }
+
+    if (visibiltyToggle === true) {
+        visToggle =
+        <button type="button" onClick={handleTogglePassword}
+        className="bg-transparent rounded-r-lg text-black text-3xl pr-2 absolute ml-[-1.275em] mt-[0.17em]">
+            {!showPassword ? <VscEye /> : <VscEyeClosed />}
+        </button>
+    }
+
+    return (
+        <>
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <div className="mt-1 mb-5">
+                <input id="confirmPassword" name="confirmPassword" ref={passwordRef} type={showPassword ? 'text' : 'password'} minLength="8" placeholder="Password" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur}  required 
+                className={`w-full rounded-lg h-10 outline-2 text-black p-2 pr-12 border-transparent focus:ring-transparent focus:border-transparent focus:outline focus:outline-indigo-500 focus:outline-offset-2 focus:shadow-[0_0px_30px_0] focus:shadow-indigo-500`} />
+                {visToggle}
+            </div>
+            {
+                !passwordsMatch && 
+                <h2 className="text-red-500 -mt-2 mb-4">Passwords must match</h2>
+            }
+        </>
+    );
+}
+
+export function PhoneNumberInputBox({ formChange }) {
     return (
         <>
             <label htmlFor="userPhone">Phone Number</label>
             <div className="mt-1 mb-5">
-                <input id="userPhone" name="phoneNumber" type="tel" placeholder="Phone Number" onChange={handleChange}
+                <input id="userPhone" name="phoneNumber" type="tel" placeholder="Phone Number" onChange={formChange}
                 className="w-full rounded-lg h-10 outline-2 text-black p-2 border-transparent focus:ring-transparent focus:border-transparent focus:outline focus:outline-indigo-500 focus:outline-offset-2" />
             </div>
         </>
     )
 }
 
-export function InputBox({ handleChange, type, name, placeholder, label }) {
+export function InputBox({ formChange, type, name, placeholder, label }) {
 
     return (
         <>
             <label htmlFor={name}>{label}</label>
             <div className="mt-1 mb-4">
-                <input id={name} type={type} name={name} placeholder={placeholder} onChange={handleChange} required
-                className="w-full rounded-lg h-10 outline-2 text-black p-2 border-transparent focus:ring-transparent focus:border-transparent focus:outline focus:outline-indigo-500 focus:outline-offset-2" />
+                <input id={name} type={type} name={name} placeholder={placeholder} onChange={formChange} required
+                className="w-full rounded-lg h-10 outline-2 text-black p-2 border-transparent focus:ring-transparent focus:border-transparent focus:outline focus:outline-indigo-500 focus:outline-offset-2 focus:shadow-[0_0px_30px_0] focus:shadow-indigo-500" />
             </div>
         </>
     );
@@ -118,9 +170,10 @@ export function AccountForm({ name, children, onSubmit, errorText }) {
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        const { email, password, staySignedIn } = formData;
+        console.log(formData);
+        const { email, password } = formData;
 
-        onSubmit({ email, password, staySignedIn });
+        onSubmit({ email, password });
     };
 
     let errBox = <></>;
@@ -133,14 +186,14 @@ export function AccountForm({ name, children, onSubmit, errorText }) {
         );
     }
 
-    const handleChange = (event) => {
+    const formChange = (event) => {
         const { name, value } = event.target;
         setFormData({ ...formData, [name]: value });
       };
     
     // TODO: Fix this so it doesn't add it to every child because some won't need it
     const childrenWithCallback = React.Children.map(children, child =>
-        React.cloneElement(child, { handleChange })
+        React.cloneElement(child, { formChange })
       );
 
     return (
@@ -161,7 +214,7 @@ export default function SignInEmailPassword({ onSubmit, onForgotPassword, errorT
         <>
             <AccountForm name="Sign In" onSubmit={onSubmit} errorText={errorText}>
                 <InputBox type="email" name="email" placeholder="Email" label="Email Address"/>
-                <PasswordInputBox visibiltyToggle={true} onFocus={() => {}}/>
+                <PasswordInputBox visibiltyToggle={true} onFocus={() => {}} onChange={() => {}}/>
                 <div className="mb-3 flex justify-end mx-2">
                     <button type="button" onClick={onForgotPassword} className="text-indigo-500 hover:text-indigo-400">Forgot Password?</button>
                 </div>
@@ -183,23 +236,24 @@ export default function SignInEmailPassword({ onSubmit, onForgotPassword, errorT
     );
 }
 
-
 function PasswordRequirement({ done, children }) {
     return (
         <section className="flex justify-start items-center">
-            <FaRegCheckCircle className={`mr-2 ${ done ? "text-green-600" : "text-red-600"}`}/>
-            <h1 className={`text-slate-500 decoration-2 ${done ? "line-through" : ""}`}>{children}</h1>
+            <FaRegCheckCircle className={`mr-2 transition-colors duration-200 ${ done ? "text-green-600" : "text-red-600"}`}/>
+            <h1 className={`text-slate-500 transition-all duration-200 decoration-2 ${done ? "line-through" : ""}`}>{children}</h1>
         </section>
     );
 }
 
 export function RegistrationEmailPassword({ onSubmit, errorText }) {
     
+    const [ password, setPassword ] = useState("");
     const [ isMinCharacters, setIsMinCharacters ] = useState(false);
     const [ hasNumber, setHasNumber ] = useState(false);
-    const [ height, setHeight ] = useState(0);
+    const [ passwordsMatch, setPasswordsMatch ] = useState(false);
     
     const handlePassword = (value) => {
+        setPassword(value);
         setIsMinCharacters(value.length >= 8);
 
         const regex = /\d/;
@@ -212,20 +266,24 @@ export function RegistrationEmailPassword({ onSubmit, errorText }) {
             placeholder="Email" label="Email Address"/>
             <PasswordInputBox visibiltyToggle={true}
             onFocus={(focus) => {
-                if (focus) {
-                    setHeight('auto');
-                }
-                else {
-                    setHeight(0);
-                }
+               
             }}
             onChange={handlePassword}/>
             <section 
             className={`border-2 flex-shrink-0 border-slate-800 w-full rounded-lg h-auto mb-5 p-2 px-4`}>
                 <PasswordRequirement done={isMinCharacters}>Atleast 8 Characters</PasswordRequirement>
                 <PasswordRequirement done={hasNumber}>Must contain atleast 1 number</PasswordRequirement>
-                <PasswordRequirement done={hasNumber}>nowodjoad</PasswordRequirement>
             </section>
+            <ConfirmPasswordInputBox visibiltyToggle={true} onFocus={(f) => {}} onChange={(value) => {
+                if (password === value) {
+                    setPasswordsMatch(true);
+                    return true; 
+                }
+                else {
+                    setPasswordsMatch(false);
+                    return false; 
+                }
+            }}/>
         </AccountForm>
     );
 }
