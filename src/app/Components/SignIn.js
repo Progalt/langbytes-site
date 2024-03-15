@@ -4,10 +4,12 @@
 import { VscEye, VscEyeClosed  } from "react-icons/vsc";
 import { FaApple  } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { FaRegCheckCircle } from "react-icons/fa";
 
 import React, { useRef, useState } from "react";
+import AnimateHeight from "react-animate-height";
 
-export function PasswordInputBox({handleChange, visibiltyToggle }) {
+export function PasswordInputBox({onChange, visibiltyToggle, onFocus }) {
 
     const [showPassword, setShowPassword] = useState(false);
     const passwordRef = useRef(null);
@@ -18,9 +20,19 @@ export function PasswordInputBox({handleChange, visibiltyToggle }) {
 
     var visToggle = <></>;
 
-    const changeOverride = (event) => {
-        handleChange(event);
+
+    const handleFocus = () => {
+       
+        onFocus(true);
     };
+
+    const handleBlur = () => {
+        onFocus(false);
+    };
+
+    const handleChange = () => {
+        onChange(event.target.value);
+    }
 
     if (visibiltyToggle === true) {
         visToggle =
@@ -34,8 +46,8 @@ export function PasswordInputBox({handleChange, visibiltyToggle }) {
         <>
             <label htmlFor="userPassword">Password</label>
             <div className="mt-1 mb-5">
-                <input id="userPassword" name="password" ref={passwordRef} type={showPassword ? 'text' : 'password'} minLength="8" placeholder="Password" onChange={changeOverride} onFocus={changeOverride} required 
-                className={`w-full rounded-lg h-10 outline-2 text-black p-2 pr-12 border-transparent focus:ring-transparent focus:border-transparent focus:outline focus:outline-blue-500 focus:outline-offset-2`} />
+                <input id="userPassword" name="password" ref={passwordRef} type={showPassword ? 'text' : 'password'} minLength="8" placeholder="Password" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur}  required 
+                className={`w-full rounded-lg h-10 outline-2 text-black p-2 pr-12 border-transparent focus:ring-transparent focus:border-transparent focus:outline focus:outline-indigo-500 focus:outline-offset-2`} />
                 {visToggle}
             </div>
         </>
@@ -48,7 +60,7 @@ export function PhoneNumberInputBox({ handleChange }) {
             <label htmlFor="userPhone">Phone Number</label>
             <div className="mt-1 mb-5">
                 <input id="userPhone" name="phoneNumber" type="tel" placeholder="Phone Number" onChange={handleChange}
-                className="w-full rounded-lg h-10 outline-2 text-black p-2 border-transparent focus:ring-transparent focus:border-transparent focus:outline focus:outline-blue-500 focus:outline-offset-2" />
+                className="w-full rounded-lg h-10 outline-2 text-black p-2 border-transparent focus:ring-transparent focus:border-transparent focus:outline focus:outline-indigo-500 focus:outline-offset-2" />
             </div>
         </>
     )
@@ -61,7 +73,7 @@ export function InputBox({ handleChange, type, name, placeholder, label }) {
             <label htmlFor={name}>{label}</label>
             <div className="mt-1 mb-4">
                 <input id={name} type={type} name={name} placeholder={placeholder} onChange={handleChange} required
-                className="w-full rounded-lg h-10 outline-2 text-black p-2 border-transparent focus:ring-transparent focus:border-transparent focus:outline focus:outline-blue-500 focus:outline-offset-2" />
+                className="w-full rounded-lg h-10 outline-2 text-black p-2 border-transparent focus:ring-transparent focus:border-transparent focus:outline focus:outline-indigo-500 focus:outline-offset-2" />
             </div>
         </>
     );
@@ -136,7 +148,7 @@ export function AccountForm({ name, children, onSubmit, errorText }) {
             {childrenWithCallback}
             {errBox}
             <input type="submit" value={name} 
-            className="w-full bg-blue-500 outline-2 h-10 rounded-lg hover:bg-blue-400 hover:outline hover:outline-blue-500 hover:outline-offset-2" />
+            className="w-full bg-indigo-500 outline-2 h-10 rounded-lg hover:bg-indigo-400 hover:outline hover:outline-indigo-500 hover:outline-offset-2" />
         
         </form>
     );
@@ -149,9 +161,9 @@ export default function SignInEmailPassword({ onSubmit, onForgotPassword, errorT
         <>
             <AccountForm name="Sign In" onSubmit={onSubmit} errorText={errorText}>
                 <InputBox type="email" name="email" placeholder="Email" label="Email Address"/>
-                <PasswordInputBox visibiltyToggle={true}/>
+                <PasswordInputBox visibiltyToggle={true} onFocus={() => {}}/>
                 <div className="mb-3 flex justify-end mx-2">
-                    <button type="button" onClick={onForgotPassword} className="text-blue-500 hover:text-blue-400">Forgot Password?</button>
+                    <button type="button" onClick={onForgotPassword} className="text-indigo-500 hover:text-indigo-400">Forgot Password?</button>
                 </div>
             </AccountForm>
             {/* <div className="mt-4 flex items-center justify-center">
@@ -172,14 +184,48 @@ export default function SignInEmailPassword({ onSubmit, onForgotPassword, errorT
 }
 
 
+function PasswordRequirement({ done, children }) {
+    return (
+        <section className="flex justify-start items-center">
+            <FaRegCheckCircle className={`mr-2 ${ done ? "text-green-600" : "text-red-600"}`}/>
+            <h1 className={`text-slate-500 decoration-2 ${done ? "line-through" : ""}`}>{children}</h1>
+        </section>
+    );
+}
 
 export function RegistrationEmailPassword({ onSubmit, errorText }) {
+    
+    const [ isMinCharacters, setIsMinCharacters ] = useState(false);
+    const [ hasNumber, setHasNumber ] = useState(false);
+    const [ height, setHeight ] = useState(0);
+    
+    const handlePassword = (value) => {
+        setIsMinCharacters(value.length >= 8);
+
+        const regex = /\d/;
+        setHasNumber(regex.test(value));
+    }
+
     return (
         <AccountForm name="Register" onSubmit={onSubmit} errorText={errorText}>
-            <InputBox type="text" name="displayName" placeholder="Display Name" label="Display Name"/>
-            <PhoneNumberInputBox></PhoneNumberInputBox>
-            <InputBox type="email" name="email" placeholder="Email" label="Email Address"/>
-            <PasswordInputBox visibiltyToggle={true}/>
+            <InputBox type="email" name="email"
+            placeholder="Email" label="Email Address"/>
+            <PasswordInputBox visibiltyToggle={true}
+            onFocus={(focus) => {
+                if (focus) {
+                    setHeight('auto');
+                }
+                else {
+                    setHeight(0);
+                }
+            }}
+            onChange={handlePassword}/>
+            <section 
+            className={`border-2 flex-shrink-0 border-slate-800 w-full rounded-lg h-auto mb-5 p-2 px-4`}>
+                <PasswordRequirement done={isMinCharacters}>Atleast 8 Characters</PasswordRequirement>
+                <PasswordRequirement done={hasNumber}>Must contain atleast 1 number</PasswordRequirement>
+                <PasswordRequirement done={hasNumber}>nowodjoad</PasswordRequirement>
+            </section>
         </AccountForm>
     );
 }

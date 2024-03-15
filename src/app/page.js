@@ -5,6 +5,7 @@ import { DifficultyButton } from "./Components/DifficultyButton";
 import { LanguageButton } from "./Components/LanguageButton";
 import AnimateHeight from 'react-animate-height';
 import { getRandomQuestionID } from "./Backend/database";
+import { IoPerson } from "react-icons/io5";
 
 
 function getRandomInteger(min, max) {
@@ -15,7 +16,7 @@ function getRandomInteger(min, max) {
 export default function Home() {
 
   const [ difficulty, setDifficulty ] = useState("Medium");
-  const [ selectedLanguages, setSelectedLanguages ] = useState([ "Python", "JavaScript" ]);
+  const [ selectedLanguages, setSelectedLanguages ] = useState([ "JavaScript" ]);
   const [ playlistSelected, setPlayListSelected] = useState(false);
   const [height, setHeight] = useState('auto');
   const contentDiv = useRef(null);
@@ -35,10 +36,6 @@ export default function Home() {
 
   useEffect( () => {
     window.addEventListener('popstate', function(event) {
-      
-      setSelectedLanguages([ "Python", "JavaScript" ]);
-      setQuestionID(0);
-      setDifficulty("Medium");
 
       window.location.reload();
     
@@ -95,7 +92,7 @@ export default function Home() {
 
   return (
       <main className="p-5 w-full h-screen flex flex-col justify-center items-center">
-        <div className="w-full lg:w-[60%]">
+        <div className="w-full md:w-[60%]">
             <section className="flex flex-col justify-center items-center pt-10 md:pt-0">
               <header className="mb-14">
                 <h1 className="text-4xl md:text-6xl">
@@ -171,6 +168,15 @@ export default function Home() {
             
             </section>
         </div>
+
+        <button onClick={() => {
+          const newURL = window.location.pathname + "signin";
+          window.history.pushState({ path: newURL }, '', newURL);
+          window.location.reload();
+
+        }} className="absolute right-5 top-5 rounded-full w-12 h-12 border-2 border-indigo-500 shadow-[0_0px_30px_0] shadow-indigo-500/50 flex justify-center items-center transition-all duration-200 hover:scale-110">
+            <IoPerson className="text-2xl"/>
+        </button>
         
 
         <footer className="absolute bottom-5">

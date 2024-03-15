@@ -14,7 +14,7 @@ export function LanguageButton({ language, selectedLanguages, setSelectedLanguag
                     setSelectedLanguages(selectedLanguages);
                 }
                 else {
-                    let arr = [...selectedLanguages, language];
+                    let arr = [language];
                      setSelectedLanguages(arr);
                 }
              }}>{language}</button>

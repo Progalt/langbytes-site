@@ -26,6 +26,19 @@ export default function Snip() {
 
     }, []);
 
+    useEffect( () => {
+        window.addEventListener('popstate', function(event) {
+          
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has("id")) {
+            setQuestionID(Number(urlParams.get("id")));
+        }
+    
+          // window.location.reload();
+        
+      });
+      }, []);
+
     function getAnotherQuestion() {
         getRandomQuestionID(difficulty, selectedLanguages).then((id) => {
             const urlParams = new URLSearchParams(window.location.search);
