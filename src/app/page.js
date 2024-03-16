@@ -4,14 +4,15 @@ import { supabase } from "./Components/TaskSnippet";
 import { DifficultyButton } from "./Components/DifficultyButton";
 import { LanguageButton } from "./Components/LanguageButton";
 import AnimateHeight from 'react-animate-height';
-import { getRandomQuestionID } from "./Backend/database";
+import { UserProvider, getRandomQuestionID, useUser } from "./Backend/database";
 import { IoPerson } from "react-icons/io5";
+import { createClient } from "./utils/supabase/client";
+import { useRouter } from "next/navigation";
 
 
 function getRandomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
 
 export default function Home() {
 
@@ -20,7 +21,8 @@ export default function Home() {
   const [ playlistSelected, setPlayListSelected] = useState(false);
   const [height, setHeight] = useState('auto');
   const contentDiv = useRef(null);
-
+  const supabase = createClient();
+  const router = useRouter();
 
   useEffect(() => {
     const element = contentDiv.current;
@@ -169,10 +171,17 @@ export default function Home() {
             </section>
         </div>
 
-        <button onClick={() => {
-          const newURL = window.location.pathname + "signin";
-          window.history.pushState({ path: newURL }, '', newURL);
-          window.location.reload();
+        <button onClick={ async () => {
+          
+          const { data, error } = await supabase.auth.getUser();
+
+          if (data.user !== null) {
+            router.push("/account");
+            return;
+          }
+
+          router.push("/signin");
+
 
         }} className="absolute right-5 top-5 rounded-full w-12 h-12 border-2 border-indigo-500 shadow-[0_0px_30px_0] shadow-indigo-500/50 flex justify-center items-center transition-all duration-200 hover:scale-110">
             <IoPerson className="text-2xl"/>

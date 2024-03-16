@@ -6,12 +6,9 @@ import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { FaRegCopy } from "react-icons/fa";
 import { MdFavoriteBorder, MdFavorite, MdOutlinePlaylistAdd   } from "react-icons/md";
 
-import { createClient } from '@supabase/supabase-js'
 import { Tooltip } from './Tooltip';
 import AnimateHeight from 'react-animate-height';
-
-
-export const supabase = createClient("https://qlfmizzkgfwibxvrfoja.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFsZm1penprZ2Z3aWJ4dnJmb2phIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTAxOTEwMDgsImV4cCI6MjAyNTc2NzAwOH0.74EX28xtvNqxzk_DfXHTEJbHlkhZDWsztThPc_1hG48")
+import { createClient } from '../utils/supabase/client';
 
 function LanguageButton({ name, setSelectedLanguage, selectedLang }) {
     return (
@@ -34,6 +31,7 @@ export function TaskSnippet({ id, difficulty, selectedLanguages }) {
     const [cachedID, setCachedID] = useState(-1);
     const [height, setHeight] = useState('auto');
     const contentDiv = useRef(null);
+    const supabase = createClient();
 
     useEffect(() => {
         const element = contentDiv.current;
