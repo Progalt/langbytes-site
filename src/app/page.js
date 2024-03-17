@@ -4,7 +4,7 @@ import { supabase } from "./Components/TaskSnippet";
 import { DifficultyButton } from "./Components/DifficultyButton";
 import { LanguageButton } from "./Components/LanguageButton";
 import AnimateHeight from 'react-animate-height';
-import { UserProvider, getRandomQuestionID, useUser } from "./Backend/database";
+import { UserProvider, getRandomQuestion, getRandomQuestionID, useUser } from "./Backend/database";
 import { IoPerson } from "react-icons/io5";
 import { createClient } from "./utils/supabase/client";
 import { useRouter } from "next/navigation";
@@ -75,17 +75,20 @@ export default function Home() {
 
   async function getNewID() {
 
-    let id = await getRandomQuestionID(difficulty, selectedLanguages);
+    let data = await getRandomQuestion(difficulty, selectedLanguages);
+
 
     const urlParams = new URLSearchParams(window.location.search);
-    urlParams.set("id", id);
+    urlParams.set("id", data.id);
     urlParams.set("difficulty", difficulty);
     urlParams.set("lang", selectedLanguages);
     
-    const newURL = window.location.pathname + "snip" + '?' + urlParams.toString();
-    window.history.pushState({ path: newURL }, '', newURL);
+    const newURL = "/snip" + '?' + urlParams.toString();
+    // window.history.pushState({ path: newURL }, '', newURL);
 
-    window.location.reload();
+    // window.location.reload();
+
+    router.push(newURL);
   }
 
   const possibleLanguages = [ "Python", "JavaScript", "Haskell" ];

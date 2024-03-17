@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { TaskSnippet } from "../Components/TaskSnippet";
-import { getRandomQuestionID } from "../Backend/database";
+import { getRandomQuestion, getRandomQuestionID } from "../Backend/database";
+import { useRouter } from "next/navigation";
 
 
 export default function Snip() {
@@ -9,6 +10,7 @@ export default function Snip() {
     const [ questionId, setQuestionID ] = useState(-1);
     const [ difficulty, setDifficulty ] = useState("");
     const [ selectedLanguages, setSelectedLanguages ] = useState([]);
+    const router = useRouter();
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -40,17 +42,18 @@ export default function Snip() {
       }, []);
 
     function getAnotherQuestion() {
-        getRandomQuestionID(difficulty, selectedLanguages).then((id) => {
+        getRandomQuestion(difficulty, selectedLanguages).then((data) => {
             const urlParams = new URLSearchParams(window.location.search);
-            urlParams.set("id", id);
+            urlParams.set("id", data.id);
 
-            const newURL = window.location.pathname + '?' + urlParams.toString();
-            window.history.pushState({ path: newURL }, '', newURL);
+            const newURL =  '/snip?' + urlParams.toString();
+            //window.history.pushState({ path: newURL }, '', newURL);
+            router.replace(newURL);
             
             // Don't need the reload
             //window.location.reload();
 
-            setQuestionID(id);
+            setQuestionID(data.id);
         });
 
     }

@@ -8,12 +8,15 @@ export default async function SignInPage() {
     const supabase = createClient();
     const { data, error } = await supabase.auth.getUser();
 
+    // if the user is signed in we want to redirect to the account page 
     if (data.user) {
         redirect("/account");
     }
 
     return (
-        <SignIn />
+        <main className="flex justify-center items-center flex-col min-h-screen">
+            <SignIn />
+        </main>
     )
 }
 

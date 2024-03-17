@@ -21,3 +21,21 @@ export async function getRandomQuestionID(difficulty, selectedLanguages) {
 
     return questions[x].id;
 }
+
+export async function getRandomQuestion(difficulty_arg, language_arg) {
+    // this is a much better method than the previous getRandomQuestionID 
+    // this handles it all on the server using database functions 
+    const supabase = createClient();
+
+
+    const { data, error } = await supabase.rpc("get_random_solution", 
+        { difficulty_arg: difficulty_arg, language_arg: language_arg[0]  }).select();
+
+
+    return data; 
+}
+
+export async function isSignedIn() {
+    const supabase = createClient();
+    return await supabase.auth.getUser() !== null; 
+}
