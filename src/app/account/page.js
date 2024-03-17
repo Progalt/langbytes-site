@@ -1,4 +1,5 @@
 
+import { redirect } from "next/navigation";
 import { createClient } from "../utils/supabase/server";
 import SignOutButton from "./signOutButton";
 
@@ -8,6 +9,10 @@ export default async function Account() {
     const supabase = createClient();
 
     const { data, error } = await supabase.auth.getUser()
+
+    if (data.user === null) {
+        redirect("/signin");
+    }
    
     
     return (
