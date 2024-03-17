@@ -15,7 +15,10 @@ export default async function SignInPage() {
 
     return (
         <main className="flex justify-center items-center flex-col min-h-screen">
-            <SignIn />
+            <section className="w-[50%]">
+                <SignIn  shouldRedirect={true} />
+            </section>
+            
         </main>
     )
 }

@@ -9,6 +9,9 @@ import { MdFavoriteBorder, MdFavorite, MdOutlinePlaylistAdd   } from "react-icon
 import { Tooltip } from './Tooltip';
 import AnimateHeight from 'react-animate-height';
 import { createClient } from '../utils/supabase/client';
+import { SignIn } from '../signin/signin';
+import { Modal } from './Modal';
+import { isSignedIn } from '../Backend/database';
 
 function LanguageButton({ name, setSelectedLanguage, selectedLang }) {
     return (
@@ -32,6 +35,7 @@ export function TaskSnippet({ id, difficulty, selectedLanguages }) {
     const [height, setHeight] = useState('auto');
     const contentDiv = useRef(null);
     const supabase = createClient();
+    const [ modalOpen, setModalOpen ] = useState(false);
 
     useEffect(() => {
         const element = contentDiv.current;
@@ -123,9 +127,25 @@ export function TaskSnippet({ id, difficulty, selectedLanguages }) {
         });
     };
 
-    const favourite = () => {
-        setFavourited(!isFavourited);
+    const favourite = async () => {
+        
+        let signedIn = ((await supabase.auth.getUser()).data.user !== null)
+
+        if (!signedIn) {
+            setModalOpen(true);
+        }
+        else {
+            setFavourited(!isFavourited);
+        }
     };
+
+    const addToList = async () => {
+        let signedIn = ((await supabase.auth.getUser()).data.user !== null)
+
+        if (!signedIn) {
+            setModalOpen(true);
+        }
+    }
 
     const revealAnswer = () => {
         if (selectedLanguageCode === "") {
@@ -144,84 +164,89 @@ export function TaskSnippet({ id, difficulty, selectedLanguages }) {
     };
 
     return (
-        <AnimateHeight className={`bg-[#13131d] overflow-visible shadow-[0_0px_200px_30px] shadow-indigo-500/20 border-2 border-slate-800 w-full rounded-lg p-4`}
-            height={height}
-            contentClassName="auto-content"
-            contentRef={contentDiv}
-            disableDisplayNone>
-            {   
-                isLoaded && 
-                <div>
-                    <p className="font-light text-xl mb-3">
-                        {question.text}
-                    </p>
-                    <div className="flex flex-row justify-between items-center mb-2">
-                        <div className="px-4 border-2 border-slate-800 rounded-full">
-                            {difficulty}
+        <>
+            <AnimateHeight className={`bg-[#13131d] overflow-visible shadow-[0_0px_200px_30px] shadow-indigo-500/20 border-2 border-slate-800 w-full rounded-lg p-4 ${modalOpen ? "blur-sm" : ""}`}
+                height={height}
+                contentClassName="auto-content"
+                contentRef={contentDiv}
+                disableDisplayNone>
+                {   
+                    isLoaded && 
+                    <div>
+                        <p className="font-light text-xl mb-3">
+                            {question.text}
+                        </p>
+                        <div className="flex flex-row justify-between items-center mb-2">
+                            <div className="px-4 border-2 border-slate-800 rounded-full">
+                                {difficulty}
+                            </div>
+                            <div className="flex flex-shrink-0 text-2xl mr-5">
+                                <Tooltip text="Add to list">
+                                    <button className="mr-4"
+                                    onClick={addToList}>
+                                        <MdOutlinePlaylistAdd className="text-white hover:text-indigo-500 transition-all duration-200"/>
+                                    </button>
+                                </Tooltip>
+                                <Tooltip text="Favourite">
+                                    <button
+                                    onClick={favourite}>
+                                        { !isFavourited && <MdFavoriteBorder className="text-white hover:text-indigo-500 transition-all duration-200" /> } 
+                                        { isFavourited && <MdFavorite className="text-indigo-500" /> }
+                                    </button>
+                                </Tooltip>
+                            </div>
                         </div>
-                        <div className="flex flex-shrink-0 text-2xl mr-5">
-                            <Tooltip text="Add to list">
-                                <button className="mr-4"
-                                onClick={() => {}}>
-                                    <MdOutlinePlaylistAdd className="text-white hover:text-indigo-500 transition-all duration-200"/>
+                        <hr className="border border-slate-800 mb-2"></hr>
+                        <p className="font-light text-lg">Input: </p>
+                        <div className="flex flex-row justify-between items-center mr-5">
+                            <code>{question.input}</code>
+                            <Tooltip text="Copy inputs">
+                                <button className="flex-shrink-0 text-xl text-white hover:text-indigo-500 transition-all duration-100" onClick={copyToClipboard}>
+                                    <FaRegCopy/>
                                 </button>
                             </Tooltip>
-                            <Tooltip text="Favourite">
-                                <button
-                                onClick={favourite}>
-                                    { !isFavourited && <MdFavoriteBorder className="text-white hover:text-indigo-500 transition-all duration-200" /> } 
-                                    { isFavourited && <MdFavorite className="text-indigo-500" /> }
-                                </button>
-                            </Tooltip>
                         </div>
-                    </div>
-                    <hr className="border border-slate-800 mb-2"></hr>
-                    <p className="font-light text-lg">Input: </p>
-                    <div className="flex flex-row justify-between items-center mr-5">
-                        <code>{question.input}</code>
-                        <Tooltip text="Copy inputs">
-                            <button className="flex-shrink-0 text-xl text-white hover:text-indigo-500 transition-all duration-100" onClick={copyToClipboard}>
-                                <FaRegCopy/>
-                            </button>
-                        </Tooltip>
-                    </div>
-                    <p className="font-light text-lg">Output: </p>
-                    <code>{question.output}</code>
-                    <br />
-                    <div className={`flex justify-end ${!isRevealed ? "pb-10" : ""}`}>
-                    { !isRevealed && 
-                    <button 
-                    onClick={() => {
-                            revealAnswer();
-                    }}
-                    className="shadow-[0_0px_30px_0] shadow-indigo-500/50 hover:shadow-red-500/50 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold rounded-lg p-[2px] transform transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-500 hover:via-red-500 hover:to-indigo-500">
-                        <span className="flex w-full bg-gray-900 text-white rounded-lg p-2 px-4">
-                        Reveal Answer
-                        </span>
-                    </button>
-                    } 
-                    </div>
-                    
-                    { isRevealed && <div className="mt-4 pb-7">
-                        <div className="flex flex-row">
-                            {Object.keys(question.codeSnippets).map((lang, index) => (
-                                <LanguageButton
-                                key={index}
-                                name={lang}
-                                selectedLang={selectedLanguageCode}
-                                setSelectedLanguage={setSelectedLanguageCode}
-                                />
-                            ))}
+                        <p className="font-light text-lg">Output: </p>
+                        <code>{question.output}</code>
+                        <br />
+                        <div className={`flex justify-end ${!isRevealed ? "pb-10" : ""}`}>
+                        { !isRevealed && 
+                        <button 
+                        onClick={() => {
+                                revealAnswer();
+                        }}
+                        className="shadow-[0_0px_30px_0] shadow-indigo-500/50 hover:shadow-red-500/50 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold rounded-lg p-[2px] transform transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-500 hover:via-red-500 hover:to-indigo-500">
+                            <span className="flex w-full bg-gray-900 text-white rounded-lg p-2 px-4">
+                            Reveal Answer
+                            </span>
+                        </button>
+                        } 
                         </div>
-                        <SyntaxHighlighter language={selectedLanguageCode.toLowerCase()} style={dracula}>
-                            {question.codeSnippets[selectedLanguageCode].trim()}
-                        </SyntaxHighlighter>
+                        
+                        { isRevealed && <div className="mt-4 pb-7">
+                            <div className="flex flex-row">
+                                {Object.keys(question.codeSnippets).map((lang, index) => (
+                                    <LanguageButton
+                                    key={index}
+                                    name={lang}
+                                    selectedLang={selectedLanguageCode}
+                                    setSelectedLanguage={setSelectedLanguageCode}
+                                    />
+                                ))}
+                            </div>
+                            <SyntaxHighlighter language={selectedLanguageCode.toLowerCase()} style={dracula}>
+                                {question.codeSnippets[selectedLanguageCode].trim()}
+                            </SyntaxHighlighter>
 
-                    
+                        
 
-                    </div> } 
-            </div>
-        }
-        </AnimateHeight>
+                        </div> } 
+                </div>
+            }
+            </AnimateHeight>
+            { modalOpen && <Modal>
+                <SignIn onConfirm={setModalOpen(false)} shouldRedirect={false}/>
+            </Modal> }
+        </>
     );
 }

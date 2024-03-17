@@ -2,10 +2,10 @@
 import { useEffect, useRef, useState } from "react";
 import SignInEmailPassword, { RegistrationEmailPassword } from "../Components/SignIn";
 import AnimateHeight from "react-animate-height";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { createClient } from "../utils/supabase/client";
 
-export function SignIn() {
+export function SignIn({ shouldRedirect, onConfirm }) {
 
     const [ signInSelected, setSignInSelected ] = useState(true);
     const [height, setHeight] = useState('auto');
@@ -65,8 +65,12 @@ export function SignIn() {
 
         //console.log(data);
 
-
-        router.push("/account");
+        if (onConfirm) {
+            onConfirm(); 
+        }
+        if (shouldRedirect == true)
+            router.push("/account");
+       
     }
 
 
@@ -85,6 +89,10 @@ export function SignIn() {
             console.log(error);
             return;
           }
+
+        if (onConfirm) {
+            onConfirm(); 
+        }
        
         setShowConfirm(true);
     }
@@ -95,7 +103,7 @@ export function SignIn() {
             contentClassName="auto-content"
             contentRef={contentDiv}
             disableDisplayNone
-            className="p-10 shadow-[0_0px_200px_30px] shadow-indigo-500/20 border-2 border-slate-800 rounded-xl w-[50%]">
+            className="p-10 shadow-[0_0px_200px_30px] shadow-indigo-500/20 border-2 border-slate-800 rounded-xl">
                 <nav className="relative flex flex-row justify-between items-center h-full mb-8">
                     <div 
                     className={`absolute top-0 w-[50%] h-10 border-2 border-indigo-500 shadow-[0_0px_20px_0px] shadow-indigo-700 bg-transparent transition-all duration-300 ease-in-out rounded-xl ${ !signInSelected ? "left-[50%]" : "left-0"}`} />
