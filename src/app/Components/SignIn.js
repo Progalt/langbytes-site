@@ -191,10 +191,14 @@ export function AccountForm({ name, children, onSubmit, errorText }) {
         setFormData({ ...formData, [name]: value });
       };
     
-    // TODO: Fix this so it doesn't add it to every child because some won't need it
-    const childrenWithCallback = React.Children.map(children, child =>
-        React.cloneElement(child, { formChange })
-      );
+    const childrenWithCallback = React.Children.map(children, child => {
+        if (React.isValidElement(child) && child.type !== 'div') {
+            // Clone the child element and add the formChange prop
+            return React.cloneElement(child, { formChange });
+        }
+        return React.cloneElement(child);
+          
+    });
 
     return (
         <form onSubmit={handleSubmit}>
@@ -252,6 +256,15 @@ export function RegistrationEmailPassword({ onSubmit, errorText }) {
     const [ hasNumber, setHasNumber ] = useState(false);
     const [ passwordsMatch, setPasswordsMatch ] = useState(false);
     
+    const submit = ({ email, password }) => {
+        let valid = isMinCharacters && hasNumber && passwordsMatch; 
+
+
+        if (valid) { 
+            onSubmit({ email, password });
+        }
+    };
+
     const handlePassword = (value) => {
         setPassword(value);
         setIsMinCharacters(value.length >= 8);
@@ -261,7 +274,7 @@ export function RegistrationEmailPassword({ onSubmit, errorText }) {
     }
 
     return (
-        <AccountForm name="Register" onSubmit={onSubmit} errorText={errorText}>
+        <AccountForm name="Register" onSubmit={submit} errorText={errorText}>
             <InputBox type="email" name="email"
             placeholder="Email" label="Email Address"/>
             <PasswordInputBox visibiltyToggle={true}

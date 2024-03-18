@@ -146,7 +146,7 @@ export default function Home() {
                       <DifficultyButton difficulty={"Medium"} selected={difficulty}  setDifficulty={updateDifficulty}/>
                       <DifficultyButton difficulty={"Hard"} selected={difficulty}  setDifficulty={updateDifficulty}/>
                     </nav> */}
-                    <nav className="md:mx-10">
+                    <nav className="md:mx-10 mb-7">
                       <DropDown options={["Easy" ,"Medium", "Hard"]} 
                       closeOnSelect={true}
                       defaultOption="Easy"
