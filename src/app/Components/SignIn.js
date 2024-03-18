@@ -282,11 +282,11 @@ export function RegistrationEmailPassword({ onSubmit, errorText }) {
                
             }}
             onChange={handlePassword}/>
-            <section 
+            <div 
             className={`border-2 flex-shrink-0 border-slate-800 w-full rounded-lg h-auto mb-5 p-2 px-4`}>
                 <PasswordRequirement done={isMinCharacters}>Atleast 8 Characters</PasswordRequirement>
                 <PasswordRequirement done={hasNumber}>Must contain atleast 1 number</PasswordRequirement>
-            </section>
+            </div>
             <ConfirmPasswordInputBox visibiltyToggle={true} onFocus={(f) => {}} onChange={(value) => {
                 if (password === value) {
                     setPasswordsMatch(true);

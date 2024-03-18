@@ -10,18 +10,18 @@
   
   .slide-up {
     animation-name: slide-up-animation;
+    pointer-events: none;
   }
+
   
   @keyframes slide-down-animation {
     0% {
-      transform: translateY(-30px);
+      transform: translateY(-25px);
       opacity: 0;
-      display: none;;
     }
     100% {
       transform: translateY(0);
       opacity: 1;
-      display: block;
     }
   }
   
@@ -29,11 +29,11 @@
     0% {
       transform: translateY(0);
       opacity: 1;
-      display: block;
     }
+
+
     100% {
-      transform: translateY(-30px);
+      transform: translateY(-25px);
       opacity: 0;
-      display: none;
     }
   }

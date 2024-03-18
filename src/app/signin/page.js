@@ -16,7 +16,9 @@ export default async function SignInPage() {
     return (
         <main className="flex justify-center items-center flex-col min-h-screen">
             <section className="w-[50%]">
-                <SignIn  shouldRedirect={true} />
+                <section className="p-10 shadow-[0_0px_200px_30px] shadow-indigo-500/20 border-2 border-slate-800 rounded-xl">
+                    <SignIn shouldRedirect={true} />
+                </section>
             </section>
             
         </main>

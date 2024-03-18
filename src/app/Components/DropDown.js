@@ -10,6 +10,12 @@ export default function DropDown({ options, onSelect, defaultOption = "", closeO
     const [ isOpen, setOpen ] = useState(false);
     
     const onClickHandler = (value) =>  {
+
+        if (!isOpen) {
+           
+            setOpen(true);
+            return; 
+        }
         setSelected(value);
         onSelect(value);
 
@@ -25,9 +31,9 @@ export default function DropDown({ options, onSelect, defaultOption = "", closeO
             className="mx-2 relative">
                 <button 
                 onClick={() => {
+                    
                     setOpen(!isOpen);
                 }}
-                onOut
                 className={`h-14 w-full flex flex-col justify-center px-4 border-2 rounded-t-lg transition-all duration-400 border-slate-800 ${!isOpen ? "rounded-lg" : ""}`}>
                     <div className="flex flex-row items-center gap-2">
                         <FaAngleRight className={`transition-all duration-150 ${isOpen ? "rotate-90" : ""}`}/>
@@ -35,17 +41,17 @@ export default function DropDown({ options, onSelect, defaultOption = "", closeO
                     </div>
                 </button>
 
-                    <button className={`dropdown-menu text-left absolute left-0 w-full z-10 bg-[#13131d] ${isOpen ? "slide-down" : "slide-up" }`}>
-                        {options.map((value, index) => {
-                            let isLast = index === options.length - 1;
-                            return ( 
-                            <div key={value} onClick={() => {onClickHandler(value);}}
-                            className={`border-b-2 border-x-2 px-10 py-2 border-slate-800 hover:bg-[#1b1b29] transition-all duration-150 ${isLast ? "rounded-b-lg" : ""}`}>
-                                {value}
-                            </div>
-                            );
-                        })}
-                    </button>
+                <button className={`dropdown-menu text-left absolute left-0 w-full z-10 bg-[#13131d] ${isOpen ? "slide-down" : "slide-up" }`}>
+                    {options.map((value, index) => {
+                        let isLast = index === options.length - 1;
+                        return ( 
+                        <div key={value} onClick={() => {onClickHandler(value);}}
+                        className={`border-b-2 border-x-2 px-10 py-2 border-slate-800 hover:bg-[#1b1b29] transition-all duration-150 ${isLast ? "rounded-b-lg" : ""}`}>
+                            {value}
+                        </div>
+                        );
+                    })}
+                </button>
                 
                 
             </section>

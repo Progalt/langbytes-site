@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { TaskSnippet } from "../Components/TaskSnippet";
 import { getRandomQuestion, getRandomQuestionID } from "../Backend/database";
 import { useRouter } from "next/navigation";
+import { SignIn } from "../signin/signin";
+import { Modal } from "../Components/Modal";
 
 
 export default function Snip() {
@@ -11,6 +13,7 @@ export default function Snip() {
     const [ difficulty, setDifficulty ] = useState("");
     const [ selectedLanguages, setSelectedLanguages ] = useState([]);
     const router = useRouter();
+    const [modalOpen, setModalOpen ] = useState(true);
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -85,6 +88,10 @@ export default function Snip() {
                 </span>
                 </button>
             </div>
+            { modalOpen && 
+            <Modal setOpen={setModalOpen}>
+                <SignIn shouldRedirect={false}/>
+            </Modal> }
         </main>
     );
 

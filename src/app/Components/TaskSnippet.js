@@ -244,9 +244,10 @@ export function TaskSnippet({ id, difficulty, selectedLanguages }) {
                 </div>
             }
             </AnimateHeight>
-            { modalOpen && <Modal>
-                <SignIn onConfirm={setModalOpen(false)} shouldRedirect={false}/>
-            </Modal> }
+            
+          
+       
+            
         </>
     );
 }

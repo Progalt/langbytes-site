@@ -18,7 +18,7 @@ function getRandomInteger(min, max) {
 export default function Home() {
   "use client";
 
-  const [ difficulty, setDifficulty ] = useState("Medium");
+  const [ difficulty, setDifficulty ] = useState("Easy");
   const [ selectedLanguages, setSelectedLanguages ] = useState([ "JavaScript" ]);
   const [height, setHeight] = useState('auto');
   const contentDiv = useRef(null);
@@ -193,7 +193,7 @@ export default function Home() {
       <footer className="flex-shrink-0 mb-4">
           <div className="flex flex-row justify-center items-center">
             <p className="text-slate-500">You can view the source</p>
-            <a href="https://github.com/Progalt/portfolio-react" className="ml-1 text-indigo-100 text-glow hover:text-white transition-all duration-150">here</a>
+            <a href="https://github.com/Progalt/portfolio-react" target="_blank" className="ml-1 text-indigo-100 text-glow hover:text-white transition-all duration-150">here</a>
           </div>
         </footer>
       </div>
