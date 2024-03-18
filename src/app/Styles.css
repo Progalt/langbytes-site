@@ -1,0 +1,39 @@
+.dropdown-menu {
+    animation-duration: 0.3s;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+  }
+  
+  .slide-down {
+    animation-name: slide-down-animation;
+  }
+  
+  .slide-up {
+    animation-name: slide-up-animation;
+  }
+  
+  @keyframes slide-down-animation {
+    0% {
+      transform: translateY(-30px);
+      opacity: 0;
+      display: none;;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+      display: block;
+    }
+  }
+  
+  @keyframes slide-up-animation {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+      display: block;
+    }
+    100% {
+      transform: translateY(-30px);
+      opacity: 0;
+      display: none;
+    }
+  }

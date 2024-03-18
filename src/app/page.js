@@ -8,6 +8,7 @@ import { UserProvider, getRandomQuestion, getRandomQuestionID, useUser } from ".
 import { IoPerson } from "react-icons/io5";
 import { createClient } from "./utils/supabase/client";
 import { useRouter } from "next/navigation";
+import DropDown from "./Components/DropDown";
 
 
 function getRandomInteger(min, max) {
@@ -102,7 +103,7 @@ export default function Home() {
 
   return (
     <main className="w-full h-screen">
-      <div className="p-5">
+      <div className="p-5 flex flex-row justify-end">
           <button onClick={ async () => {
 
           const { data, error } = await supabase.auth.getUser();
@@ -140,40 +141,48 @@ export default function Home() {
                 disableDisplayNone
                 className={`w-full border-2 border-slate-800 mb-6 p-1 pt-5 rounded-xl shadow-[0_0px_200px_30px] shadow-indigo-500/20 transition-all duration-300 ease-in-out`}>
                   <div>
-                    <nav className="flex flex-col md:flex-row justify-center items-center">
+                    {/* <nav className="flex flex-col md:flex-row justify-center items-center">
                       <DifficultyButton difficulty={"Easy"} selected={difficulty} setDifficulty={updateDifficulty}/>
                       <DifficultyButton difficulty={"Medium"} selected={difficulty}  setDifficulty={updateDifficulty}/>
                       <DifficultyButton difficulty={"Hard"} selected={difficulty}  setDifficulty={updateDifficulty}/>
+                    </nav> */}
+                    <nav className="md:mx-10">
+                      <DropDown options={["Easy" ,"Medium", "Hard"]} 
+                      closeOnSelect={true}
+                      defaultOption="Easy"
+                      onSelect={(option) =>{
+                        updateDifficulty(option);
+                      } } />
                     </nav>
-                      <div className="mt-4 mb-8 mx-1">
+                    <div className="mt-4 mb-8 mx-1">
+                        {
+                          Array.from({ length: numRows }).map((_, rowIndex) => (
+                          <div key={rowIndex} className="mt-2 flex justify-center items-center w-full gap-4">
                           {
-                            Array.from({ length: numRows }).map((_, rowIndex) => (
-                            <div key={rowIndex} className="mt-2 flex justify-center items-center w-full gap-4">
-                            {
-                              possibleLanguages.slice(rowIndex * numColumns, (rowIndex + 1) * numColumns).map((lang, index) => {
-                                  return <LanguageButton key={lang} language={lang} selectedLanguages={selectedLanguages} setSelectedLanguages={setSelectedLanguages}></LanguageButton>
-                                })
-                            }
-                            </div>
-                            ))
-                        }
-                      </div>
-                      
+                            possibleLanguages.slice(rowIndex * numColumns, (rowIndex + 1) * numColumns).map((lang, index) => {
+                                return <LanguageButton key={lang} language={lang} selectedLanguages={selectedLanguages} setSelectedLanguages={setSelectedLanguages}></LanguageButton>
+                              })
+                          }
+                          </div>
+                          ))
+                      }
                     </div>
+                      
+                  </div>
                   
-                      <div className="flex flex-row justify-center items-center p-10 pt-1">
-                    
-                      <button 
-                      onClick={() => {
-                        getNewID();
-                      }}
-                      className="shadow-[0_0px_30px_0] shadow-indigo-500/50 hover:shadow-red-500/50 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold rounded-full p-[2px] transform transition-all duration-300 hover:scale-110 hover:bg-gradient-to-r hover:from-purple-500 hover:via-red-500 hover:to-indigo-500">
-                        <span className="flex w-full bg-gray-900 text-white rounded-full p-2 px-4">
-                          Give me a question
-                        </span>
-                      </button>
+                  <div className="flex flex-row justify-center items-center p-10 pt-1">
+                
+                  <button 
+                  onClick={() => {
+                    getNewID();
+                  }}
+                  className="shadow-[0_0px_30px_0] shadow-indigo-500/50 hover:shadow-red-500/50 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold rounded-full p-[2px] transform transition-all duration-300 hover:scale-110 hover:bg-gradient-to-r hover:from-purple-500 hover:via-red-500 hover:to-indigo-500">
+                    <span className="flex w-full bg-gray-900 text-white rounded-full p-2 px-4">
+                      Give me a question
+                    </span>
+                  </button>
 
-                      </div>
+                  </div>
                          
                 </AnimateHeight>
               
