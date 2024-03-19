@@ -2,6 +2,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "../utils/supabase/server";
 import { SignIn } from "./signin";
+import BackHomebutton from "./homeButton";
 
 export default async function SignInPage() {
 
@@ -15,12 +16,14 @@ export default async function SignInPage() {
 
     return (
         <main className="flex justify-center items-center flex-col min-h-screen">
-            <section className="w-[50%]">
+            <section className="w-full  md:w-[50%]">
                 <section className="p-10 shadow-[0_0px_200px_30px] shadow-indigo-500/20 border-2 border-slate-800 rounded-xl">
+                    <nav className="pb-5 flex flex-row justify-end">
+                        <BackHomebutton />
+                    </nav>
                     <SignIn shouldRedirect={true} />
                 </section>
             </section>
-            
         </main>
     )
 }

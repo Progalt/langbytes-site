@@ -14,6 +14,7 @@ export function SignIn({ shouldRedirect, onConfirm }) {
     const supabase = createClient();
     const router = useRouter();
     const searchParams = useSearchParams()
+    const [ errorText, setErrorText ] = useState("");
 
     useEffect(() => {
         
@@ -33,7 +34,8 @@ export function SignIn({ shouldRedirect, onConfirm }) {
         });
 
         if (error) {
-            console.log(err);
+            console.log(error);
+            setErrorText(error.message);
             return;
         }
 
@@ -42,8 +44,10 @@ export function SignIn({ shouldRedirect, onConfirm }) {
         if (onConfirm) {
             onConfirm(); 
         }
-        if (shouldRedirect == true)
-            router.push("/account");
+
+        // This did redirect to an account page but I think redirecting to home is better
+        if (shouldRedirect === true)
+            router.push("/");
        
     }
 
@@ -76,8 +80,8 @@ export function SignIn({ shouldRedirect, onConfirm }) {
             <nav className="relative flex flex-row justify-between items-center h-full mb-8">
                 <div 
                 className={`absolute top-0 w-[50%] h-10 border-2 border-indigo-500 shadow-[0_0px_20px_0px] shadow-indigo-700 bg-transparent transition-all duration-300 ease-in-out rounded-xl ${ !signInSelected ? "left-[50%]" : "left-0"}`} />
-                <button className="w-full bg-[#212536] m-1 rounded-lg h-8" onClick={() => {setSignInSelected(true); console.log("Sign In selected"); }}>Sign In</button>
-                <button className="w-full bg-[#212536] m-1 rounded-lg h-8" onClick={() => {setSignInSelected(false); console.log("Register") }}>Register</button>
+                <button className="w-full bg-[#212536] m-1 rounded-lg h-8" onClick={() => {setSignInSelected(true); console.log("Sign In selected"); setErrorText(""); }}>Sign In</button>
+                <button className="w-full bg-[#212536] m-1 rounded-lg h-8" onClick={() => {setSignInSelected(false); console.log("Register"); setErrorText("");  }}>Register</button>
             </nav>
             {
                 signInSelected && 
@@ -86,7 +90,7 @@ export function SignIn({ shouldRedirect, onConfirm }) {
                     <hr className="border-[1px] rounded-lg border-slate-800 mb-4"/>
                     <SignInEmailPassword 
                     onSubmit={onSignIn}
-                    errorText=""/>
+                    errorText={errorText}/>
                 </section>
             }
             {
@@ -99,7 +103,7 @@ export function SignIn({ shouldRedirect, onConfirm }) {
                             <hr className="border-[1px] rounded-lg border-slate-800 mb-4"/>
                             <RegistrationEmailPassword
                             onSubmit={onRegister}
-                            errorText=""
+                            errorText={errorText}
                             />
                         </>
                     }

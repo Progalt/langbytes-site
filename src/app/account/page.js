@@ -15,13 +15,11 @@ export default async function Account() {
     }
    
     return (
-        <div className="min-h-screen flex justify-center items-center">
-            <section className="p-4 w-full h-fit m-4 border-2 border-slate-800 rounded-lg shadow-[0_0px_200px_30px] shadow-indigo-500/20">
-                <h1 className="text-2xl">Hi <span className="text-glow">{data.user.email}</span></h1>
-                <div className="flex flex-row justify-end items-center pt-1 mt-4">
-                    <SignOutButton />
-                </div>
-            </section>
+        <div className="min-h-screen">
+            <nav className="flex flex-row justify-between items-center p-5">
+                <SignOutButton />
+            </nav>
+           
         </div>
     )
 }
