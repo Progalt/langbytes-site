@@ -47,6 +47,7 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
 
         return () => resizeObserver.disconnect();
     }, []);
+
     
 
     const [ question , setQuestion ] = useState({
@@ -55,6 +56,8 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
         output: "",
         codeSnippets: {}, 
     });
+
+
 
     useEffect(() => {
         async function load() {
@@ -108,7 +111,7 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
 
                 console.log(data);
 
-                if (data) {
+                if (data.id !== null) {
                     if (Array.isArray(data)) {
                         for (let i = 0; i < data.length; i++) {
                             if (i.is_favourites) {
@@ -122,6 +125,9 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
                         }
                     }
                 }
+            } 
+            else {
+                setFavourited(false);
             }
             
             //console.log(question);

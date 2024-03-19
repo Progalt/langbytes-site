@@ -9,6 +9,8 @@ import { IoPerson } from "react-icons/io5";
 import { createClient } from "./utils/supabase/client";
 import { useRouter } from "next/navigation";
 import DropDown from "./Components/DropDown";
+import { IconContext } from "react-icons";
+import "./Styles.css";
 
 
 function getRandomInteger(min, max) {
@@ -16,7 +18,6 @@ function getRandomInteger(min, max) {
 }
 
 export default function Home() {
-  "use client";
 
   const [ difficulty, setDifficulty ] = useState("Easy");
   const [ selectedLanguages, setSelectedLanguages ] = useState([ "JavaScript" ]);
@@ -25,6 +26,20 @@ export default function Home() {
   const supabase = createClient();
   const router = useRouter();
   const [ isMobile, setmobile ] = useState(false);
+  const [ isUserSignedIn, setUserSignedIn ] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const supabase = createClient();
+      
+      let { data, error } = await supabase.auth.getUser();
+        
+      setUserSignedIn(data.user !== null);
+    };
+
+    fetchData(); // Call the fetchData function
+
+  }, []);
 
   useEffect(() => {
     setmobile(!window.matchMedia("(min-width: 768px)").matches);
@@ -49,6 +64,8 @@ export default function Home() {
     
   });
   });
+
+ 
 
   useEffect( () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -103,22 +120,47 @@ export default function Home() {
 
   return (
     <main className="w-full h-screen">
-      <div className="p-5 flex flex-row justify-end">
-          <button onClick={ async () => {
+      <div className="p-5 flex flex-row justify-end gap-2">
+          { !isUserSignedIn && <>
+            <button onClick={ async () => {
 
-          const { data, error } = await supabase.auth.getUser();
+        
+            router.push("/signin");
 
-          if (data.user !== null) {
-            router.push("/account");
-            return;
+
+            }} className="flex flex-row items-center justify-center rounded-lg bg-gradient-to-tr from-purple-500  to-indigo-500  p-2 px-6 transition-all duration-200 shadow-[0_0_30px_0px] shadow-indigo-500/50 hover:scale-110">
+
+              <h1 className="font-bold">Sign In</h1>  
+          
+            </button>
+            <button onClick={ async () => {
+
+
+              router.push("/signin?t=register");
+
+
+            }} className="flex flex-row items-center justify-center rounded-lg bg-gradient-to-tr from-purple-500  to-indigo-500  p-[2px] transition-all duration-200 shadow-[0_0_30px_0px] shadow-indigo-500/50 hover:scale-110">
+              
+              <div className="w-24 h-full bg-[#0a0a0f] flex justify-center items-center rounded-lg">
+                <h1 className="font-bold text-glow">Register</h1>  
+              </div>
+
+            </button>
+          </> }
+          {
+            isUserSignedIn && 
+            <button onClick={ async () => {
+
+        
+              router.push("/account");
+  
+  
+              }} className="flex flex-row items-center justify-center rounded-lg bg-gradient-to-tr from-purple-500  to-indigo-500  p-2 px-6 transition-all duration-200 shadow-[0_0_30px_0px] shadow-indigo-500/50 hover:scale-110">
+  
+                <h1 className="font-bold">Account</h1>  
+            
+            </button>
           }
-
-          router.push("/signin");
-
-
-          }} className="flex flex-row items-center justify-center rounded-full w-12 h-12 border-2 border-indigo-500 shadow-[0_0px_30px_0] shadow-indigo-500/50  transition-all duration-200 hover:scale-110">
-            <IoPerson className="text-2xl"/>
-          </button>
       </div>
       <div className="flex flex-col justify-between">
         <section className="px-5 md:mt-14 w-full flex flex-col justify-start md:justify-center items-center">
@@ -127,12 +169,12 @@ export default function Home() {
               <section className="flex flex-col justify-center items-center">
                 <header className="mb-6 md:mb-14">
                   <h1 className="text-4xl md:text-6xl">
-                    Quickly get questions to test your 
+                    Quickly get problems to test your 
                     <span className="text-glow text-indigo-100"> coding skills.
                     </span>
                   </h1>
                 
-                  <h2 className="md:text-xl mt-6">Select a difficulty or enter a playlist and start coding!</h2>
+                  <h2 className="md:text-xl mt-6">Select a difficulty and a language and start coding!</h2>
                 </header>
                 <AnimateHeight 
                 height={height}
@@ -140,12 +182,7 @@ export default function Home() {
                 contentRef={contentDiv}
                 disableDisplayNone
                 className={`w-full border-2 border-slate-800 mb-6 p-1 pt-5 rounded-xl shadow-[0_0px_200px_30px] shadow-indigo-500/20 transition-all duration-300 ease-in-out`}>
-                  <div>
-                    {/* <nav className="flex flex-col md:flex-row justify-center items-center">
-                      <DifficultyButton difficulty={"Easy"} selected={difficulty} setDifficulty={updateDifficulty}/>
-                      <DifficultyButton difficulty={"Medium"} selected={difficulty}  setDifficulty={updateDifficulty}/>
-                      <DifficultyButton difficulty={"Hard"} selected={difficulty}  setDifficulty={updateDifficulty}/>
-                    </nav> */}
+                  <article>
                     <nav className="md:mx-10 mb-7">
                       <DropDown options={["Easy" ,"Medium", "Hard"]} 
                       closeOnSelect={true}
@@ -154,7 +191,7 @@ export default function Home() {
                         updateDifficulty(option);
                       } } />
                     </nav>
-                    <div className="mt-4 mb-8 mx-1">
+                    <section className="mt-4 mb-8 mx-1">
                         {
                           Array.from({ length: numRows }).map((_, rowIndex) => (
                           <div key={rowIndex} className="mt-2 flex justify-center items-center w-full gap-4">
@@ -166,9 +203,9 @@ export default function Home() {
                           </div>
                           ))
                       }
-                    </div>
+                    </section>
                       
-                  </div>
+                  </article>
                   
                   <div className="flex flex-row justify-center items-center p-10 pt-1">
                 
@@ -191,10 +228,10 @@ export default function Home() {
 
         </section>
       <footer className="flex-shrink-0 mb-4">
-          <div className="flex flex-row justify-center items-center">
+          <section className="flex flex-row justify-center items-center">
             <p className="text-slate-500">You can view the source</p>
-            <a href="https://github.com/Progalt/portfolio-react" target="_blank" className="ml-1 text-indigo-100 text-glow hover:text-white transition-all duration-150">here</a>
-          </div>
+            <a href="https://github.com/Progalt/portfolio-react" target="_blank" className="ml-1 text-indigo-200 text-glow hover:text-white transition-all duration-150">here</a>
+          </section>
         </footer>
       </div>
      

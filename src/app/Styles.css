@@ -37,3 +37,8 @@
       opacity: 0;
     }
   }
+
+  .svg-glow {
+    -webkit-filter: drop-shadow( 0px 0px 16px rgb(99, 102, 241));
+    filter: drop-shadow( 0px 0px 16px rgb(99, 102, 241));
+  }

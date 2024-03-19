@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import SignInEmailPassword, { RegistrationEmailPassword } from "../Components/SignIn";
 import AnimateHeight from "react-animate-height";
-import { redirect, useRouter } from "next/navigation";
+import { redirect, useRouter, useSearchParams  } from "next/navigation";
 import { createClient } from "../utils/supabase/client";
 
 export function SignIn({ shouldRedirect, onConfirm }) {
@@ -13,6 +13,15 @@ export function SignIn({ shouldRedirect, onConfirm }) {
     const [ registerShowConfirm, setShowConfirm ] = useState(false);
     const supabase = createClient();
     const router = useRouter();
+    const searchParams = useSearchParams()
+
+    useEffect(() => {
+        
+        if (searchParams.get("t") === "register") {
+            setSignInSelected(false);
+        }
+        
+    }, []);
   
 
     const  onSignIn = async ({ email, password }) => {
