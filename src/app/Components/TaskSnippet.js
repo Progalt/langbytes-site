@@ -25,7 +25,7 @@ function LanguageButton({ name, setSelectedLanguage, selectedLang }) {
     )
 }
 
-export function TaskSnippet({ id, difficulty, selectedLanguages }) {
+export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }) {
 
     const [isLoaded, setIsLoaded] = useState(false);
     const [isRevealed, setIsRevealed] = useState(false);
@@ -35,7 +35,6 @@ export function TaskSnippet({ id, difficulty, selectedLanguages }) {
     const [height, setHeight] = useState('auto');
     const contentDiv = useRef(null);
     const supabase = createClient();
-    const [ modalOpen, setModalOpen ] = useState(false);
 
     useEffect(() => {
         const element = contentDiv.current;
@@ -95,7 +94,35 @@ export function TaskSnippet({ id, difficulty, selectedLanguages }) {
                     codeSnippets: languageMap
                 }
              );
+            
+            // test if its a favourited question
+            
+            let user = (await supabase.auth.getUser()).data.user;
+            let signedIn = (user !== null);
 
+            if (signedIn) {
+                // if the user is signed in 
+
+                const { data, error } = await supabase
+                        .rpc("get_lists_for_question", { question_id: id, user_id: user.id});
+
+                console.log(data);
+
+                if (data) {
+                    if (Array.isArray(data)) {
+                        for (let i = 0; i < data.length; i++) {
+                            if (i.is_favourites) {
+                                setFavourited(true);
+                            }
+                        }
+                    }
+                    else {
+                        if (data.is_favourites) {
+                            setFavourited(true);
+                        }
+                    }
+                }
+            }
             
             //console.log(question);
 
@@ -129,13 +156,58 @@ export function TaskSnippet({ id, difficulty, selectedLanguages }) {
 
     const favourite = async () => {
         
-        let signedIn = ((await supabase.auth.getUser()).data.user !== null)
+        let user = (await supabase.auth.getUser()).data.user;
+        let signedIn = (user !== null)
 
         if (!signedIn) {
-            setModalOpen(true);
+            onNotSignedIn();
         }
         else {
-            setFavourited(!isFavourited);
+            
+            // TODO: Secure this
+
+            if (isFavourited !== true) {
+
+                const { data, err } = await supabase.from("list")
+                    .select("*")
+                    .eq("user_id", user.id)
+                    .eq("name", "favourites").single();
+
+               
+                // Create a new entry if it doesn't exist
+                if (data.length === 0) {
+                    console.log("Creating a new favourites list");
+
+                    const { data, err } = await supabase.from("list").insert(
+                        { 
+                            name: "favourites", 
+                            user_id: user.id, 
+                            is_favourites: true 
+                        }).select().single();
+                    
+                
+                    await supabase.from("list_entry").insert({ list_id: data.id, question_id: id });
+                
+                    
+                }
+                else {
+                    await supabase.from("list_entry").insert({ list_id: data.id, question_id: id });
+                }
+
+                
+
+                //const { error } = await supabase.from("list_entry").insert({ list_id: ,question_id: id })
+
+                setFavourited(true);
+            }
+            else {
+
+                // we want to remove it
+
+                await supabase.from("list_entry").
+
+                setFavourited(false);
+            }
         }
     };
 
@@ -143,7 +215,7 @@ export function TaskSnippet({ id, difficulty, selectedLanguages }) {
         let signedIn = ((await supabase.auth.getUser()).data.user !== null)
 
         if (!signedIn) {
-            setModalOpen(true);
+            onNotSignedIn();
         }
     }
 
@@ -165,7 +237,7 @@ export function TaskSnippet({ id, difficulty, selectedLanguages }) {
 
     return (
         <>
-            <AnimateHeight className={`bg-[#13131d] overflow-visible shadow-[0_0px_200px_30px] shadow-indigo-500/20 border-2 border-slate-800 w-full rounded-lg p-4 ${modalOpen ? "blur-sm" : ""}`}
+            <AnimateHeight className={`bg-[#13131d] overflow-visible shadow-[0_0px_200px_30px] shadow-indigo-500/20 border-2 border-slate-800 w-full rounded-lg p-4`}
                 height={height}
                 contentClassName="auto-content"
                 contentRef={contentDiv}

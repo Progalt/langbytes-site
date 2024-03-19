@@ -103,7 +103,6 @@ export function SignIn({ shouldRedirect, onConfirm }) {
                     }
                 </section>
             }
-            <div className="h-20"></div>
         </>
     );
 }

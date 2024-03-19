@@ -5,6 +5,7 @@ import { getRandomQuestion, getRandomQuestionID } from "../Backend/database";
 import { useRouter } from "next/navigation";
 import { SignIn } from "../signin/signin";
 import { Modal } from "../Components/Modal";
+import OutsideClick from "../Components/OutsideClick";
 
 
 export default function Snip() {
@@ -13,7 +14,7 @@ export default function Snip() {
     const [ difficulty, setDifficulty ] = useState("");
     const [ selectedLanguages, setSelectedLanguages ] = useState([]);
     const router = useRouter();
-    const [modalOpen, setModalOpen ] = useState(true);
+    const [modalOpen, setModalOpen ] = useState(false);
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -63,13 +64,16 @@ export default function Snip() {
 
     return (
         <main className="p-5 w-full h-screen flex flex-col justify-center items-center">
-            <div className="w-full lg:w-[60%]">
+            <div className={`w-full lg:w-[60%} ${modalOpen ? "blur-sm" : ""}`}>
                 {
                     questionId !== -1 && 
                     <TaskSnippet
                     id={questionId}
                     difficulty={difficulty} 
-                    selectedLanguages={selectedLanguages}/>
+                    selectedLanguages={selectedLanguages}
+                    onNotSignedIn={() => {
+                        setModalOpen(true);
+                    }} />
                 }
                 {
                     questionId === -1 && 
@@ -89,9 +93,12 @@ export default function Snip() {
                 </button>
             </div>
             { modalOpen && 
-            <Modal setOpen={setModalOpen}>
-                <SignIn shouldRedirect={false}/>
-            </Modal> }
+                <Modal setOpen={setModalOpen}>
+                    <SignIn shouldRedirect={false} onConfirm={() => {
+                        setModalOpen(false);
+                    }}/>
+                </Modal>
+            }
         </main>
     );
 
