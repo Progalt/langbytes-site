@@ -21,8 +21,6 @@ export default function Home() {
 
   const [ difficulty, setDifficulty ] = useState("Easy");
   const [ selectedLanguages, setSelectedLanguages ] = useState([ "JavaScript" ]);
-  const [height, setHeight] = useState('auto');
-  const contentDiv = useRef(null);
   const supabase = createClient();
   const router = useRouter();
   const [ isMobile, setmobile ] = useState(false);
@@ -45,17 +43,7 @@ export default function Home() {
     setmobile(!window.matchMedia("(min-width: 768px)").matches);
   })
 
-  useEffect(() => {
-    const element = contentDiv.current;
 
-    const resizeObserver = new ResizeObserver(() => {
-      setHeight(element.clientHeight);
-    });
-
-    resizeObserver.observe(element);
-
-    return () => resizeObserver.disconnect();
-  }, [ ]);
 
   useEffect( () => {
     window.addEventListener('popstate', function(event) {
@@ -120,7 +108,11 @@ export default function Home() {
 
   return (
     <main className="w-full h-screen">
-      <div className="p-5 flex flex-row justify-end gap-2">
+      <div className="p-5 flex flex-row justify-between gap-2">
+        <div>
+         
+        </div>
+        <div className="flex-shrink-0 flex flex-row gap-2">
           { !isUserSignedIn && <>
             <button onClick={ async () => {
 
@@ -161,6 +153,7 @@ export default function Home() {
             
             </button>
           }
+          </div>
       </div>
       <div className="flex flex-col justify-between">
         <section className="px-5 md:mt-14 w-full flex flex-col justify-start md:justify-center items-center">
@@ -168,22 +161,18 @@ export default function Home() {
           <div className="w-full md:w-[80%] lg:w-[60%]">
               <section className="flex flex-col justify-center items-center">
                 <header className="mb-6 md:mb-14">
-                  <h1 className="text-4xl md:text-6xl">
+                  <h1 className="text-4xl md:text-6xl font-bold">
                     Quickly get problems to test your 
                     <span className="text-glow text-indigo-100"> coding skills.
                     </span>
                   </h1>
                 
-                  <h2 className="md:text-xl mt-6">Select a difficulty and a language and start coding!</h2>
+                  <h2 className="md:text-xl mt-8 text-slate-300">Select a difficulty and a language and start coding!</h2>
                 </header>
-                <AnimateHeight 
-                height={height}
-                contentClassName="auto-content"
-                contentRef={contentDiv}
-                disableDisplayNone
-                className={`w-full border-2 border-slate-800 mb-6 p-1 pt-5 rounded-xl shadow-[0_0px_200px_30px] shadow-indigo-500/20 transition-all duration-300 ease-in-out`}>
+                <section 
+                className={`w-full  mb-6 p-1 pt-5`}>
                   <article>
-                    <nav className="md:mx-10 mb-7">
+                    <nav className="md:mx-10 mb-10">
                       <DropDown options={["Easy" ,"Medium", "Hard"]} 
                       closeOnSelect={true}
                       defaultOption="Easy"
@@ -207,7 +196,7 @@ export default function Home() {
                       
                   </article>
                   
-                  <div className="flex flex-row justify-center items-center p-10 pt-1">
+                  <div className="flex flex-row justify-center items-center p-5">
                 
                   <button 
                   onClick={() => {
@@ -221,7 +210,7 @@ export default function Home() {
 
                   </div>
                          
-                </AnimateHeight>
+                </section>
               
               </section>
           </div>

@@ -13,6 +13,12 @@ import { SignIn } from '../signin/signin';
 import { Modal } from './Modal';
 import { isSignedIn } from '../Backend/database';
 
+export const knownLanguages = [
+    "JavaScript",
+    "Python",
+    "Haskell"
+];
+
 function LanguageButton({ name, setSelectedLanguage, selectedLang }) {
     return (
         <button onClick={() => { setSelectedLanguage(name) }}
@@ -210,7 +216,7 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
 
                 // we want to remove it
 
-                await supabase.from("list_entry").
+                
 
                 setFavourited(false);
             }
@@ -226,8 +232,8 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
     }
 
     const revealAnswer = () => {
-        if (selectedLanguageCode === "") {
-            setSelectedLanguageCode(selectedLanguages[0]);
+        if (selectedLanguageCode === "" || !knownLanguages.includes(selectedLanguageCode)) {
+            setSelectedLanguageCode("JavaScript");
             setIsRevealed(true);
             return;
         }

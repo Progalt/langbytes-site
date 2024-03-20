@@ -170,7 +170,6 @@ export function AccountForm({ name, children, onSubmit, errorText }) {
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        console.log(formData);
         const { email, password } = formData;
 
         onSubmit({ email, password });

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { TaskSnippet } from "../Components/TaskSnippet";
+import { TaskSnippet, knownLanguages } from "../Components/TaskSnippet";
 import { getRandomQuestion, getRandomQuestionID } from "../Backend/database";
 import { useRouter } from "next/navigation";
 import { SignIn } from "../signin/signin";
@@ -21,13 +21,22 @@ export default function Snip() {
 
         if (urlParams.has("id")) {
             // We have an ID we want to pass it to the state 
+
+            // TODO: Error check
             let id = Number(urlParams.get("id"));
             let diff = urlParams.get("difficulty");
             let langs = urlParams.get("lang");
 
-            setSelectedLanguages([ langs ]);
             setQuestionID(id);
             setDifficulty(diff);
+
+
+            if (langs === "" || !knownLanguages.includes(langs)) {
+                setSelectedLanguages("JavaScript");
+            }
+            else {
+                setSelectedLanguages([ langs ]);
+            }
         }
 
     }, []);
