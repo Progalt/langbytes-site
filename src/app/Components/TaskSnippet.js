@@ -114,9 +114,7 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
 
                 const { data, error } = await supabase
                         .rpc("get_lists_for_question", { question_id: id, user_id: user.id});
-
-                console.log(data);
-
+                    
                 if (data.id !== null) {
                     if (Array.isArray(data)) {
                         for (let i = 0; i < data.length; i++) {
@@ -130,6 +128,9 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
                             setFavourited(true);
                         }
                     }
+                }
+                else {
+                    setFavourited(false);
                 }
             } 
             else {
@@ -207,7 +208,7 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
                     
                 }
                 else {
-                    await supabase.from("list_entry").insert({ list_id: data.id, question_id: id });
+                     await supabase.from("list_entry").insert({ list_id: data.id, question_id: id });
                 }
 
                 
@@ -229,10 +230,18 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
 
                 if (data !== null) {
 
-                    supabase.from("list_entry")
+
+                    const { error } = await supabase
+                        .from("list_entry")
                         .delete()
-                        .eq("list_id", data.id)
-                        .eq("question_id", id);
+                        .eq("question_id", id)
+                        .eq("list_id", data.id);
+                    
+                    if (error) {
+                        console.log(error);
+                        return;
+                    }
+                    
 
                     setFavourited(false);
                 }
