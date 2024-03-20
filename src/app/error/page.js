@@ -8,7 +8,7 @@ export default function ErrorPage() {
                     <span className="text-glow text-indigo-100">Whoops! </span>
                     Something went wrong.
                 </h1>
-                <h2 className="pt-[30px] pb-2 text-slate-300">We aren't sure what but maybe going back to home might help.</h2>
+                <h2 className="pt-[30px] pb-2 text-slate-300">We aren&apos;t sure what but maybe going back to home might help.</h2>
                 <a href="/" className="text-glow">Take me back!</a>
             </article>
         </main>
