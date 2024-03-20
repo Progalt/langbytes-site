@@ -80,18 +80,28 @@ export default function Home() {
   }, []);
 
   const updateDifficulty = (difficulty) => {
-    console.log(difficulty);
+    
     setDifficulty(difficulty);
   }
 
   async function getNewID() {
 
-    let data = await getRandomQuestion(difficulty, selectedLanguages);
+    let dif = difficulty;
+    // IHJDIHJWIHJQD
+    // ONLY FOR NOW
+    if (difficulty !== "Easy") {
+      console.warn("Force easy on!");
+      dif = "Easy";
+    }
+
+    let data = await getRandomQuestion(dif, selectedLanguages);
+
+    
 
 
     const urlParams = new URLSearchParams(window.location.search);
     urlParams.set("id", data.id);
-    urlParams.set("difficulty", difficulty);
+    urlParams.set("difficulty", dif);
     urlParams.set("lang", selectedLanguages);
     
     const newURL = "/snip" + '?' + urlParams.toString();
