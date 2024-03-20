@@ -5,7 +5,7 @@ import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 import { FaRegCopy } from "react-icons/fa";
 import { MdFavoriteBorder, MdFavorite, MdOutlinePlaylistAdd   } from "react-icons/md";
-
+import { BiShare } from "react-icons/bi";
 import { Tooltip } from './Tooltip';
 import AnimateHeight from 'react-animate-height';
 import { createClient } from '../utils/supabase/client';
@@ -171,6 +171,15 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
         });
     };
 
+    const share = () => {
+        navigator.clipboard.writeText(window.location.href).then(
+            () => {
+                console.log("Copied link to clipboard: ", window.location.href);
+            }
+        )
+        
+    }
+
     const favourite = async () => {
         
         let user = (await supabase.auth.getUser()).data.user;
@@ -295,10 +304,16 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
                                 {difficulty}
                             </div>
                             <div className="flex flex-shrink-0 text-2xl mr-5">
-                                <Tooltip text="Add to list">
+                                {/* <Tooltip text="Add to list">
                                     <button className="mr-4"
                                     onClick={addToList}>
                                         <MdOutlinePlaylistAdd className="text-white hover:text-indigo-500 transition-all duration-200"/>
+                                    </button>
+                                </Tooltip> */}
+                                <Tooltip text="Share">
+                                    <button className="mr-4"
+                                    onClick={share}>
+                                      <BiShare className="text-white hover:text-indigo-500 transition-all duration-200"/>
                                     </button>
                                 </Tooltip>
                                 <Tooltip text="Favourite">

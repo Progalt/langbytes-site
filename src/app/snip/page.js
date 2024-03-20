@@ -85,7 +85,7 @@ export default function Snip() {
 
     return (
         <main className="p-5 w-full h-screen flex flex-col justify-center items-center">
-            <div className={`w-full lg:w-[60%} ${modalOpen ? "blur-sm" : ""}`}>
+            <div className={`w-full lg:w-[60%] ${modalOpen ? "blur-sm" : ""}`}>
                 {
                     questionId !== -1 && 
                     <TaskSnippet
