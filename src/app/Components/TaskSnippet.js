@@ -157,9 +157,9 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
     // const output = "[4, 16, 64]";
 
     const copyToClipboard = () => {
-        navigator.clipboard.writeText(input)
+        navigator.clipboard.writeText(question.input)
         .then(() => {
-            console.log("Copied inputs to clipboard: ", input);
+            console.log("Copied inputs to clipboard: ", question.input);
         })
         .catch((err) => {
             console.log("Failed to copy inputs to clipboard: ", err);
@@ -187,7 +187,7 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
 
                
                 // Create a new entry if it doesn't exist
-                if (data.length === 0) {
+                if (data === null) {
                     console.log("Creating a new favourites list");
 
                     const { data, err } = await supabase.from("list").insert(
@@ -196,6 +196,10 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
                             user_id: user.id, 
                             is_favourites: true 
                         }).select().single();
+
+                    if (err) { 
+                        console.log(err);
+                    }
                     
                 
                     await supabase.from("list_entry").insert({ list_id: data.id, question_id: id });
@@ -207,7 +211,7 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
                 }
 
                 
-
+                console.log("Favourited");
                 //const { error } = await supabase.from("list_entry").insert({ list_id: ,question_id: id })
 
                 setFavourited(true);
@@ -216,9 +220,22 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
 
                 // we want to remove it
 
-                
+                console.log("Unfavourited");
 
-                setFavourited(false);
+                const { data, err } = await supabase.from("list")
+                    .select("*")
+                    .eq("user_id", user.id)
+                    .eq("name", "favourites").single();
+
+                if (data !== null) {
+
+                    supabase.from("list_entry")
+                        .delete()
+                        .eq("list_id", data.id)
+                        .eq("question_id", id);
+
+                    setFavourited(false);
+                }
             }
         }
     };
