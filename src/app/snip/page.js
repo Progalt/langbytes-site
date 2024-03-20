@@ -27,8 +27,20 @@ export default function Snip() {
             let diff = urlParams.get("difficulty");
             let langs = urlParams.get("lang");
 
+            const knownDifficulties = [
+                "Easy", 
+                "Medium",
+                "Hard"
+            ];
+
+            if (!knownDifficulties.includes(diff)) {
+                router.push("/error");
+            }
+
             setQuestionID(id);
             setDifficulty(diff);
+
+            
 
 
             if (langs === "" || !knownLanguages.includes(langs)) {

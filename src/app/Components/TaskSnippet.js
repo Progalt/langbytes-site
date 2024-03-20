@@ -12,6 +12,7 @@ import { createClient } from '../utils/supabase/client';
 import { SignIn } from '../signin/signin';
 import { Modal } from './Modal';
 import { isSignedIn } from '../Backend/database';
+import { useRouter } from 'next/navigation';
 
 export const knownLanguages = [
     "JavaScript",
@@ -41,6 +42,7 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
     const [height, setHeight] = useState('auto');
     const contentDiv = useRef(null);
     const supabase = createClient();
+    const router = useRouter();
 
     useEffect(() => {
         const element = contentDiv.current;
@@ -75,7 +77,8 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
             .single(); 
 
             if (q === null) {
-                console.log(error);
+                //console.log(error);
+                router.push("/error")
                 return;
             }
 
@@ -83,7 +86,8 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
             .from("solution")
             .select("*")
             .eq("question_id", id);
-
+            
+           
 
             const languageMap = snips.reduce((acc, obj) => {
               
