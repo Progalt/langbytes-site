@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { SignIn } from "../signin/signin";
 import { Modal } from "../Components/Modal";
 import OutsideClick from "../Components/OutsideClick";
+import BackHomebutton from "../signin/homeButton";
 
 
 export default function Snip() {
@@ -85,6 +86,9 @@ export default function Snip() {
 
     return (
         <main className="p-5 w-full h-screen flex flex-col justify-center items-center">
+            <div className="absolute top-0 left-0 p-5">
+                <BackHomebutton></BackHomebutton>
+            </div>
             <div className={`w-full lg:w-[60%] ${modalOpen ? "blur-sm" : ""}`}>
                 {
                     questionId !== -1 && 
