@@ -31,6 +31,14 @@ export default async function Home() {
           </div>
 
           <hr className="w-[90%] md:w-[70%] border-[1px] rounded-full border-slate-800"></hr>
+          <article className="w-full md:w-[80%] lg:w-[60%] mt-12">
+            <h3 className="mb-2 text-slate-300 italic font-light">Fancy a challenge?</h3>
+            <h2 className="text-3xl md:text-4xl font-semibold">Complete a <span className="text-glow font-extrabold">Daily challenge</span></h2>
+            <h3 className="mt-5 font-light md:text-xl text-slate-300">
+              Take on a fresh challenge daily that isn't in the main question pool.
+            </h3>
+            <p className="mt-3 text-slate-300">Questions are new a fresh for the day then get added to the question pool so you can always come back to it later.</p>
+          </article>
 
         </section>
       <footer className="flex-shrink-0 mb-4">
