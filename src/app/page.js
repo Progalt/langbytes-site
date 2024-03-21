@@ -86,22 +86,11 @@ export default function Home() {
 
   async function getNewID() {
 
-    let dif = difficulty;
-    // IHJDIHJWIHJQD
-    // ONLY FOR NOW
-    if (difficulty !== "Easy") {
-      console.warn("Force easy on!");
-      dif = "Easy";
-    }
-
-    let data = await getRandomQuestion(dif, selectedLanguages);
-
-    
-
+    let data = await getRandomQuestion(difficulty, selectedLanguages);
 
     const urlParams = new URLSearchParams(window.location.search);
     urlParams.set("id", data.id);
-    urlParams.set("difficulty", dif);
+    urlParams.set("difficulty", difficulty);
     urlParams.set("lang", selectedLanguages);
     
     const newURL = "/snip" + '?' + urlParams.toString();
