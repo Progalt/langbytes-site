@@ -108,7 +108,7 @@ export default function Snip() {
                     }
                 </div>
 
-                <div className="flex flex-row justify-center items-center pt-1 mt-4">
+                <div className="flex flex-row justify-center items-center pt-1 mt-4 mb-4">
                     <button 
                     onClick={() => {
                         getAnotherQuestion()

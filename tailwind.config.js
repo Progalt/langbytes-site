@@ -9,7 +9,9 @@ module.exports = {
     extend: {
       transitionProperty: {
         'height': 'height',
+        'no-border-color': 'olor, background-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter'
       },
+      
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

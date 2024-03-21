@@ -46,8 +46,9 @@ export function SignIn({ shouldRedirect, onConfirm }) {
         }
 
         // This did redirect to an account page but I think redirecting to home is better
-        if (shouldRedirect === true)
+        if (shouldRedirect === true) {
             router.push("/");
+        }
        
     }
 
