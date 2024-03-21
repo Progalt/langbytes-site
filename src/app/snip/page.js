@@ -113,8 +113,8 @@ export default function Snip() {
                     onClick={() => {
                         getAnotherQuestion()
                     }}
-                    className="shadow-[0_0px_30px_0] shadow-indigo-500/50 hover:shadow-red-500/50 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold rounded-full p-[2px] transform transition-all duration-300 hover:scale-110 hover:bg-gradient-to-r hover:from-purple-500 hover:via-red-500 hover:to-indigo-500">
-                    <span className="flex w-full bg-gray-900 text-white rounded-full p-2 px-4">
+                    className="shadow-[0_0px_30px_0] shadow-indigo-500/50 hover:shadow-red-500/50 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold rounded-lg p-[2px] transform transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-500 hover:via-red-500 hover:to-indigo-500">
+                    <span className="flex w-full bg-gray-900 text-white rounded-lg p-2 px-4">
                         Another question
                     </span>
                     </button>
