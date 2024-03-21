@@ -1,6 +1,6 @@
-# Codesnip
+# Langbytes
 
-Codesnip is a quick way to get simple to more difficult coding problems to help test your knowledge and skills. It also provides the answers in multiple languages. 
+Langbytes is a quick way to get simple to more difficult coding problems to help test your knowledge and skills. It also provides the answers in multiple languages. 
 
 > As a User you can also favourite problems for later and create lists
 
@@ -11,6 +11,6 @@ Its super easy to share problems too. If you like a problem and want to share wi
 ---
 
 
- Written in NextJS using Tailwind CSS and Supabase
+ Written in React JS with NextJS using Tailwind CSS and Supabase
 
 ---
