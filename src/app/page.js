@@ -35,7 +35,7 @@ export default async function Home() {
             <h3 className="mb-2 text-slate-300 italic font-light">Fancy a challenge?</h3>
             <h2 className="text-3xl md:text-4xl font-semibold">Complete a <span className="text-glow font-extrabold">Daily challenge</span></h2>
             <h3 className="mt-5 font-light md:text-xl text-slate-300">
-              Take on a fresh challenge daily that is not in the main question pool.
+              Take on a fresh challenge daily that isn&apos;t in the main question pool.
             </h3>
             <p className="mt-3 text-slate-300 font-light">Questions are new for the day then get added to the question pool so you can always come back to it later.</p>
             <section className="mt-10 mb-10 flex flex-row justify-center items-center">
