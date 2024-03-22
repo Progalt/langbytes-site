@@ -14,7 +14,7 @@ export default function Snippet({ id, title, difficulty }) {
     return (
         <button 
             onClick={onClick}
-            className="my-2 p-2 px-4 w-full flex flex-col text-start border-2 border-slate-800 rounded-lg hover:scale-[101%] transition-all duration-150">
+            className="bg-[#13131d] my-2 p-2 px-4 w-full flex flex-col text-start border-2 border-slate-800 rounded-lg hover:scale-[101%] transition-all duration-150">
             <h1 className="text-xl mb-2">{title}</h1>
             <section className="px-4 w-fit border-2 border-slate-800 rounded-full ">
                 {difficulty}
