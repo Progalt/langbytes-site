@@ -15,7 +15,7 @@ export default function Educators() {
                             Langbytes can help. 
                         </p>
                         <p className="mt-2">
-                            Langbytes doesn't require a sign up or an active account to use so its perfect for students. 
+                            Langbytes doesn&apos;t require a sign up or an active account to use so its perfect for students. 
                             Though it can be great with an account, especially for you educators, you can favourite 
                             problems you like! <span className="italic">Pretty cool if you ask me!</span> And you can 
                             make lists (WIP). This is great if you want to save a question for later to use in a lesson. 
