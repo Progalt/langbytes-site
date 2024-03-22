@@ -23,6 +23,6 @@ export default function SignOutButton() {
                 Sign Out
             </span>
         </button>
-    );
+        );
 
 }
