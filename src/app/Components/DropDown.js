@@ -28,7 +28,7 @@ export default function DropDown({ options, onSelect, defaultOption = "", closeO
     return (
         <OutsideClick onClickOutside={() => { setOpen(false); }}>
             <section 
-            className="mx-2 relative">
+            className="mx-2 relative bg-[#0a0a0f]">
                 <button 
                 onClick={() => {
                     

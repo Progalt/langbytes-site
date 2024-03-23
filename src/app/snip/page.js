@@ -8,6 +8,8 @@ import { Modal } from "../Components/Modal";
 import OutsideClick from "../Components/OutsideClick";
 import BackHomebutton from "../signin/homeButton";
 
+import "../Styles.css";
+
 
 export default function Snip() {
 
@@ -85,12 +87,13 @@ export default function Snip() {
     }
 
     return (
-        <main className="p-5 w-full h-screen">
+        <main className="p-5 w-full h-screen flex justify-center">
             <div className="absolute top-0 left-0 p-5">
                 <BackHomebutton></BackHomebutton>
             </div>
             <section className="flex flex-col justify-center items-center">
-                <div className={`w-full mt-14 lg:w-[60%] ${modalOpen ? "blur-sm" : ""}`}
+                <div className="background-svg-snip bg-[length:200%] md:bg-[length:110%]" />
+                <div className={`w-full mt-14 ${modalOpen ? "blur-sm" : ""}`}
                 style={{  }}>
                     {
                         questionId !== -1 && 
