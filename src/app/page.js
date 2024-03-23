@@ -8,12 +8,8 @@ export default async function Home() {
 
 
   return (
-<<<<<<< HEAD
     <main className="w-screen min-h-screen flex flex-col relative">
       <div className="background-svg bg-[length:200%] md:bg-[length:120%]" />
-=======
-    <main className="w-full min-h-screen flex flex-col">
->>>>>>> 40f17ca7491248567614e14da48aed6f36a02ac0
       <UserNav/>
       <div className="flex flex-col flex-grow justify-between">
         <section className="px-5 md:mt-14 w-full flex flex-col justify-start md:justify-center items-center">
