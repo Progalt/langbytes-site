@@ -8,14 +8,15 @@ export default async function Home() {
 
 
   return (
-    <main className="w-screen min-h-screen flex flex-col">
+    <main className="w-screen min-h-screen flex flex-col relative">
+      <div className="background-svg bg-[length:200%] md:bg-[length:120%]" />
       <UserNav/>
       <div className="flex flex-col flex-grow justify-between">
         <section className="px-5 md:mt-14 w-full flex flex-col justify-start md:justify-center items-center">
           
           <div className="w-full md:w-[80%] lg:w-[60%]">
               <section className="flex flex-col justify-center items-center">
-                <header className="mb-6 md:mb-14">
+                <header className="mb-6 mt-10 md:mb-14">
                   <h1 className="text-4xl md:text-6xl font-semibold">
                     Quickly get problems to test your 
                     <span className="text-glow font-extrabold text-indigo-100"> coding skills.
@@ -23,6 +24,7 @@ export default async function Home() {
                   </h1>
                 
                   <h2 className="md:text-xl mt-8 text-slate-300 font-light">Select a difficulty and a language and start coding!</h2>
+                 
                 </header>
 
                 <HomeClient />
