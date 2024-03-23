@@ -8,15 +8,19 @@ export default async function Home() {
 
 
   return (
+<<<<<<< HEAD
     <main className="w-screen min-h-screen flex flex-col relative">
       <div className="background-svg bg-[length:200%] md:bg-[length:120%]" />
+=======
+    <main className="w-full min-h-screen flex flex-col">
+>>>>>>> 40f17ca7491248567614e14da48aed6f36a02ac0
       <UserNav/>
       <div className="flex flex-col flex-grow justify-between">
         <section className="px-5 md:mt-14 w-full flex flex-col justify-start md:justify-center items-center">
           
           <div className="w-full md:w-[80%] lg:w-[60%]">
               <section className="flex flex-col justify-center items-center">
-                <header className="mb-6 md:mb-14">
+                <header className="mb-6 mt-10 md:mb-14">
                   <h1 className="text-4xl md:text-6xl font-semibold">
                     Quickly get problems to test your 
                     <span className="text-glow font-extrabold text-indigo-100"> coding skills.
@@ -37,7 +41,7 @@ export default async function Home() {
             <h3 className="mb-2 text-slate-300 italic font-light">Fancy a challenge?</h3>
             <h2 className="text-3xl md:text-4xl font-semibold">Complete a <span className="text-glow font-extrabold">Daily challenge</span></h2>
             <h3 className="mt-5 font-light md:text-xl text-slate-300">
-              Take on a fresh challenge daily that isn't in the main question pool.
+              Take on a fresh challenge daily that isn&apos;t in the main question pool.
             </h3>
             <p className="mt-3 text-slate-300 font-light">Questions are new for the day then get added to the question pool so you can always come back to it later.</p>
             <section className="mt-10 mb-10 flex flex-row justify-center items-center">

@@ -4,6 +4,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createClient } from "../utils/supabase/client";
+import NavButton from "./NavButton";
 
 
 export default function UserNav() {
@@ -27,9 +28,9 @@ export default function UserNav() {
     }, []);
 
     return (
-        <div className="p-5 flex flex-row justify-between gap-2">
+        <div className="p-5 flex flex-row justify-between items-center gap-2">
             <div>
-            
+                {/* <NavButton name="Educators" location="/educators" /> */}
             </div>
             <div className="flex-shrink-0 flex flex-row gap-2 h-10">
             { !userSignedIn && <>

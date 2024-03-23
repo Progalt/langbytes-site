@@ -18,11 +18,9 @@ export default function SignOutButton() {
     return (
         <button 
         onClick={action} 
-        className="shadow-[0_0px_30px_0] shadow-indigo-500/50 hover:shadow-red-500/50 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold rounded-full p-[2px] transform transition-all duration-300 hover:scale-110 hover:bg-gradient-to-r hover:from-purple-500 hover:via-red-500 hover:to-indigo-500">
-            <span className="flex w-full bg-gray-900 text-white rounded-full p-2 px-4">
-                Sign Out
-            </span>
+        className="w-28 flex flex-row items-center justify-center rounded-lg bg-[#0a0a0f] border-2 border-indigo-500 p-[2px] transition-all duration-200 hover:bg-indigo-500">
+            <h1 className="font-semibold">Sign Out </h1>  
         </button>
-    );
+        );
 
 }
