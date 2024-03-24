@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { createClient } from "../utils/supabase/client";
 import NavButton from "./NavButton";
 import { HiMenu, HiOutlineX  } from "react-icons/hi";
-import MobileDropDownNav, { MobileDropDownButton, MobileDropDownDividor } from "./MobileDropDown";
+import MobileDropDownNav, { MobileDropDownButton, MobileDropDownDividor, MobileDropDownNavWithButton } from "./MobileDropDown";
 import OutsideClick from "./OutsideClick";
 
 function SignInButton() {
@@ -93,7 +93,7 @@ export default function UserNav() {
     return (
         <>
             <div className=" md:hidden">
-                <nav className="p-5 pb-2 flex flex-row justify-end items-center">
+                {/* <nav className="p-5 pb-2 flex flex-row justify-end items-center">
                 <button onClick={ async () => {                
                         setShowDropDownMenu(!showDropDownMenu);
                     }} className="flex flex-row items-center justify-center rounded-lg border-indigo-500 border-2 hover:bg-indigo-500 bg-[#13131d] p-2 transition-all duration-200 hover:shadow-[0_0_30px_0px] hover:shadow-indigo-500/50">
@@ -151,7 +151,47 @@ export default function UserNav() {
                             
                        </MobileDropDownNav>
                     </OutsideClick>
-                }
+                } */}
+                <MobileDropDownNavWithButton>
+                    <MobileDropDownButton 
+                    onClick={() => {
+                        
+                    }}
+                    title="Educators"
+                    highlight={false}
+                    />
+                    {
+                        !userSignedIn && 
+                        <>
+                            <MobileDropDownDividor />
+                            <MobileDropDownButton 
+
+                            onClick={() => {
+                                router.push("/signin?t=register");
+                            }}
+                            title="Register"
+                            highlight={false}
+                            />
+                            <MobileDropDownButton 
+                            onClick={() => {
+                                router.push("/signin");
+                            }}
+                            title="Sign In"
+                            highlight={true}
+                            />
+                        </>
+                    }
+                    {
+                        userSignedIn && 
+                        <MobileDropDownButton 
+                        onClick={() => {
+                            router.push("/account");
+                        }}
+                        title="Account"
+                        highlight={true}
+                        />
+                    }
+                </MobileDropDownNavWithButton>
             </div>
             <div className="p-5 md:flex flex-row justify-between items-center gap-2 hidden">
                 <div>

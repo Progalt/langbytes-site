@@ -1,6 +1,8 @@
 
+import { useState } from "react";
 import "../Styles.css";
 import { motion } from "framer-motion"
+import { HiMenu, HiOutlineX  } from "react-icons/hi";
 
 
 const item = {
@@ -10,9 +12,10 @@ const item = {
   }
 
   const container = {
-    hidden: { height: 0 },
+    hidden: { height: "auto", width: 50 },
     show: {
       height: "auto",
+      width: "auto",
       transition: {
         delayChildren: 0.15,
         staggerChildren: 0.15
@@ -22,7 +25,7 @@ const item = {
   
   
 
-export function MobileDropDownButton({ onClick, title, highlight, visible }) {
+export function MobileDropDownButton({ onClick, title, highlight }) {
 
     return (
         <motion.li
@@ -54,6 +57,40 @@ export default function MobileDropDownNav({ children, visible }) {
             <div className=" mx-2 p-1 border-2 border-slate-800 bg-[#0a0a0f] rounded-xl">
                 {children}
             </div>
+        </motion.ol>
+    );
+}
+
+export function MobileDropDownNavWithButton({ children }) {
+
+    const [ open, setOpen ] = useState(false);
+
+    const menuButtonStyle = {
+        
+      };
+
+    return (
+        <motion.ol
+        animate={ open ? "show" : "hidden"}
+        variants={container}
+        className={`overflow-hidden m-5 bg-[#13131d] border-2 rounded-xl border-indigo-500`}>
+            <button onClick={ async () => {                
+                       setOpen(!open);
+                    }} className="rounded-lg bg-[#13131d] p-2">
+
+                        { !open && <HiMenu className="text-3xl"/> }
+                        { open && <HiOutlineX  className="text-3xl"/> }
+
+            </button>
+           
+            {
+                <motion.div
+                    animate={{ height: open ? "auto" : 0}}
+                    className={`px-2 ${open ? "py-1 pb-2" : ""}`}>
+                    {children}
+                </motion.div>
+            }
+           
         </motion.ol>
     );
 }
