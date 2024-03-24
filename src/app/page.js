@@ -3,15 +3,15 @@ import "./Styles.css";
 import UserNav from "./Components/UserNav";
 import HomeClient from "./homeClient";
 
-
+ 
 export default async function Home() {
 
 
   return (
-    <main className="w-screen min-h-screen flex flex-col relative">
+    <main className="w-full min-h-screen flex flex-col relative">
       <div className="background-svg bg-[length:200%] md:bg-[length:120%]" />
       <UserNav/>
-      <div className="flex flex-col flex-grow justify-between">
+      <div className="flex flex-col flex-grow justify-between transition-transform duration-150">
         <section className="px-5 md:mt-14 w-full flex flex-col justify-start md:justify-center items-center">
           
           <div className="w-full md:w-[80%] lg:w-[60%]">
@@ -19,7 +19,7 @@ export default async function Home() {
                 <header className="mb-6 mt-10 md:mb-14">
                   <h1 className="text-4xl md:text-6xl font-semibold">
                     Quickly get problems to test your 
-                    <span className="text-glow font-extrabold text-indigo-100"> coding skills.
+                    <span className="text-glow font-extrabold text-indigo-100 italic"> coding skills.
                     </span>
                   </h1>
                 
@@ -35,7 +35,7 @@ export default async function Home() {
           <hr className="w-[90%] md:w-[70%] border-[1px] rounded-full border-slate-800"></hr>
           <article className="w-full md:w-[80%] lg:w-[60%] mt-20">
             <h3 className="mb-2 text-slate-300 italic font-light">Fancy a challenge?</h3>
-            <h2 className="text-3xl md:text-4xl font-semibold">Complete a <span className="text-glow font-extrabold">Daily challenge</span></h2>
+            <h2 className="text-3xl md:text-4xl font-semibold">Complete a <span className="text-glow font-extrabold italic">Daily challenge</span></h2>
             <h3 className="mt-5 font-light md:text-xl text-slate-300">
               Take on a fresh challenge daily that isn&apos;t in the main question pool.
             </h3>
