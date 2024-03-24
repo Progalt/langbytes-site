@@ -157,6 +157,13 @@ export default function UserNav() {
                     onClick={() => {
                         
                     }}
+                    title="Roadmap"
+                    highlight={false}
+                    />
+                    <MobileDropDownButton 
+                    onClick={() => {
+                        
+                    }}
                     title="Educators"
                     highlight={false}
                     />
