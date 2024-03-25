@@ -35,7 +35,7 @@ export function MobileDropDownButton({ onClick, title, highlight, hightlightColo
         >
             <button
             onClick={onClick}
-            className={`px-5 font-semibold text-left w-full h-12 my-[2px] rounded-lg ${outlineStyling} ${highlight ? hightlightColour : "bg-[#13131d"}`}>
+            className={`px-5 font-semibold text-left w-full h-12 my-[2px] rounded-lg ${outlineStyling} ${highlight ? hightlightColour : "bg-transparent"}`}>
                 <h1>{title}</h1>
             </button>
         </motion.li>
@@ -83,7 +83,7 @@ export function MobileDropDownNavWithButton({ children, borderStyling }) {
                         setTimeout(() => {
                             setIsButtonDisabled(false);
                           }, 250);
-                        }} className="rounded-lg bg-[#13131d] p-2">
+                        }} className="rounded-lg bg-transparent p-2">
 
                             { !open && <HiMenu className="text-3xl"/> }
                             { open && <HiOutlineX  className="text-3xl"/> }
