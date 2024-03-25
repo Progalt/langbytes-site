@@ -12,17 +12,17 @@ export default async function Home() {
 
   return (
     <main className="w-full min-h-screen flex flex-col relative">
-      <div className="background-svg opacity-40 md:opacity-30 bg-[length:200%] md:bg-[length:120%]" />
+      <div className="background-svg opacity-40 md:opacity-30 bg-[length:200%] md:bg-[length:100%] lg:bg-[length:80%] xl:bg-[length:50%]" />
       <UserNav/>
       <div className="flex flex-col flex-grow justify-between transition-transform duration-150">
         <section className="px-5 md:mt-14 w-full flex flex-col justify-start items-center">
           
           <div className="w-full md:w-[80%] lg:w-[70%] 2xl:w-[40%]">
-              <section className="flex flex-col justify-center items-center">
+              <section className="flex flex-col justify-center items-start">
                 <header className=" mt-10 md:mb-14">
                   <h1 className="text-4xl md:text-6xl font-semibold">
-                    Quickly get problems to test your
-                    <span className={"font-extrabold text-indigo-500 bg-gradient-to-b from-purple-500 to-indigo-500 text-transparent bg-clip-text"}> coding skills.
+                    Quickly get <br />problems to test <br />your
+                    <span className={"font-extrabold text-indigo-500 bg-gradient-to-tl from-fuchsia-500 to-indigo-500 text-transparent bg-clip-text"}> coding skills.
                     </span>
                   </h1>
                 
@@ -35,10 +35,10 @@ export default async function Home() {
               </section>
           </div>
 
-          <article className="w-full h-full md:w-[80%] lg:w-[70%] 2xl:w-[40%] mt-24 p-5 py-8  rounded-xl">
+          <article className="w-full h-full md:w-[80%] lg:w-[70%] 2xl:w-[40%] mt-36 p-5 py-8  rounded-xl">
             <section className="">
               <h3 className="mb-2 text-[#FF705B] italic font-semibold">Fancy a challenge?</h3>
-              <h2 className="text-3xl md:text-4xl font-semibold">Complete a <span className="font-extrabold  bg-gradient-to-b from-[#FFB457] to-[#FF705B] text-transparent bg-clip-text">Daily challenge.</span></h2>
+              <h2 className="text-3xl md:text-4xl font-semibold">Complete a <span className="font-extrabold  bg-gradient-to-tl from-[#FFB457] to-[#FF705B] text-transparent bg-clip-text">Daily challenge.</span></h2>
               <h3 className="mt-5 font-light md:text-xl text-slate-300 text-lg">
                 Take on a fresh challenge daily that isn&apos;t in the main question pool.
               </h3>
@@ -51,7 +51,7 @@ export default async function Home() {
           </article>
 
           <section>
-
+            
           </section>
 
         </section>
@@ -66,4 +66,4 @@ export default async function Home() {
      
     </main>
   );
-}
+}  

@@ -30,8 +30,8 @@ export default function NewQuestion({ difficulty, selectedLanguages, func }) {
          
           
         }}
-        className="shadow-[0_0px_30px_0] shadow-indigo-500/50 hover:shadow-red-500/50 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold rounded-xl p-[2px] transform transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-500 hover:via-red-500 hover:to-indigo-500">
-          <span className="flex w-full bg-gray-900 text-white rounded-xl p-2 px-4">
+        className="shadow-lg shadow-black bg-gradient-to-tl from-fuchsia-500 to-indigo-500 text-white font-semibold rounded-xl p-[2px] transform transition-all duration-300 ">
+          <span className="flex w-full bg-[#13131d] hover:bg-[#232333] text-white rounded-xl p-2 px-6">
             Give me a question
           </span>
         </button>

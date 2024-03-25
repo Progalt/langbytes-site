@@ -8,6 +8,7 @@ import NavButton from "./NavButton";
 import { HiMenu, HiOutlineX  } from "react-icons/hi";
 import MobileDropDownNav, { MobileDropDownButton, MobileDropDownDividor, MobileDropDownNavWithButton } from "./MobileDropDown";
 import OutsideClick from "./OutsideClick";
+import { BasicButton } from "./BevelledButton";
 
 function SignInButton() {
     const router = useRouter();
@@ -59,7 +60,7 @@ function AccountButton() {
             router.push("/account");
 
 
-            }} className="w-28 flex flex-row items-center justify-center rounded-lg bg-indigo-500 border-2 border-indigo-500 hover:bg-[#0a0a0f]  p-2 px-6 transition-all duration-200">
+            }} className="w-28 flex flex-row items-center justify-center rounded-lg bg-indigo-500 border-indigo-400 hover:bg-indigo-400 hover:border-indigo-300 border-2   p-2 px-6 transition-color duration-200">
 
                 <h1 className="font-semibold">Account</h1>  
             

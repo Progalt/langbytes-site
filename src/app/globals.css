@@ -28,6 +28,10 @@ body {
     text-shadow: 0 0 10px #6366f1 , 0 0 20px #6366f1 , 0 0 40px #6366f1 , 0 0 80px #6366f1 , 0 0 120px #6366f1 ;
   }
 
+  .slight-text-glow {
+    text-shadow: 0 0 5px #6366f1 , 0 0 10px #6366f1 , 0 0 20px #6366f1 , 0 0 40px #6366f1 , 0 0 60px #6366f1 ;
+  }
+
   .text-glow-red {
     text-shadow: 0 0 10px rgb(255, 75, 75) , 0 0 20px rgb(255, 75, 75) , 0 0 40px rgb(255, 75, 75) , 0 0 80px rgb(255, 75, 75) , 0 0 120px rgb(255, 75, 75) ;
   }

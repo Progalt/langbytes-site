@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import DropDown, { DropDownAnimated } from "./Components/DropDown";
 import { LanguageButton } from "./Components/LanguageButton";
 import NewQuestion from "./Components/NewQuestion";
+import BevelledButton from "./Components/BevelledButton";
 
 
 
@@ -63,6 +64,7 @@ export default function HomeClient() {
                 
                 <div className="flex flex-row justify-center items-center p-5">
                     <NewQuestion difficulty={difficulty} selectedLanguages={selectedLanguages}/>
+                    
                 </div>
                          
         </section>
