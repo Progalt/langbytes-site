@@ -46,14 +46,14 @@
 .background-svg {
     position: absolute; /* Change to fixed to make it position relative to the viewport */
     top: -50%; /* Position it at the top */
-    left: 0; /* Position it at the left */
-    width: 100%; /* Make it cover the entire width of the viewport */
+    left: -25%; /* Position it at the left */
+    width: 125%; /* Make it cover the entire width of the viewport */
     height: 150%; /* Make it cover the entire height of the viewport */
     z-index: -1; /* Ensure it stays behind other content */
     background-image: url('/ccchaos.svg'); /* URL to your SVG file */
     /* background-size: 100%;  */
     background-position: center;
-    opacity: 0.25;
+    background-repeat: no-repeat;
   }
 
 .background-svg-snip {

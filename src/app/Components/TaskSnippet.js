@@ -7,12 +7,13 @@ import { FaRegCopy } from "react-icons/fa";
 import { MdFavoriteBorder, MdFavorite, MdOutlinePlaylistAdd   } from "react-icons/md";
 import { BiShare } from "react-icons/bi";
 import { Tooltip } from './Tooltip';
-import AnimateHeight from 'react-animate-height';
 import { createClient } from '../utils/supabase/client';
 import { SignIn } from '../signin/signin';
 import { Modal } from './Modal';
 import { isSignedIn } from '../Backend/database';
 import { useRouter } from 'next/navigation';
+import LabelledCode from './LabelledCode';
+import { AnimatePresence, motion } from "framer-motion"
 
 export const knownLanguages = [
     "JavaScript",
@@ -39,23 +40,8 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
     const [selectedLanguageCode, setSelectedLanguageCode] = useState("");
     const [isFavourited, setFavourited] = useState(false);
     const [cachedID, setCachedID] = useState(-1);
-    const [height, setHeight] = useState('auto');
-    const contentDiv = useRef(null);
     const supabase = createClient();
     const router = useRouter();
-
-    useEffect(() => {
-        const element = contentDiv.current;
-
-        const resizeObserver = new ResizeObserver(() => {
-        setHeight(element.clientHeight);
-        });
-
-        resizeObserver.observe(element);
-
-        return () => resizeObserver.disconnect();
-    }, []);
-
     
 
     const [ question , setQuestion ] = useState({
@@ -161,15 +147,6 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
     // const input = "[2, 4, 8]";
     // const output = "[4, 16, 64]";
 
-    const copyToClipboard = () => {
-        navigator.clipboard.writeText(question.input)
-        .then(() => {
-            console.log("Copied inputs to clipboard: ", question.input);
-        })
-        .catch((err) => {
-            console.log("Failed to copy inputs to clipboard: ", err);
-        });
-    };
 
     const share = () => {
         navigator.clipboard.writeText(window.location.href).then(
@@ -288,19 +265,20 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
 
     return (
         <>
-            <AnimateHeight className={`bg-[#13131d] overflow-visible shadow-[0_0px_200px_30px] shadow-indigo-500/20 border-2 border-slate-800 w-full rounded-lg p-4`}
-                height={height}
-                contentClassName="auto-content"
-                contentRef={contentDiv}
-                disableDisplayNone>
+        <AnimatePresence>
+            <motion.div className={`bg-[#13131d] overflow-hidden border-2 border-[#232333] w-full rounded-lg p-4`}
+                animate={{ height: "auto"}}
+                transition={{ duration: 1 }}>
                 {   
                     isLoaded && 
-                    <div>
+                    <motion.div
+                    animate={{ height: "auto"}}
+                    transition={{ duration: 1 }}>
                         <p className="font-light text-xl mb-3">
                             {question.text}
                         </p>
                         <div className="flex flex-row justify-between items-center mb-2">
-                            <div className="px-4 border-2 border-slate-800 rounded-full">
+                            <div className="px-4 border-2 border-[#232333] rounded-full">
                                 {difficulty}
                             </div>
                             <div className="flex flex-shrink-0 text-2xl mr-5">
@@ -325,19 +303,11 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
                                 </Tooltip>
                             </div>
                         </div>
-                        <hr className="border border-slate-800 mb-2"></hr>
-                        <p className="font-light text-lg">Input: </p>
-                        <div className="flex flex-row justify-between items-center mr-5">
-                            <code>{question.input}</code>
-                            <Tooltip text="Copy inputs">
-                                <button className="flex-shrink-0 text-xl text-white hover:text-indigo-500 transition-all duration-100" onClick={copyToClipboard}>
-                                    <FaRegCopy/>
-                                </button>
-                            </Tooltip>
-                        </div>
-                        <p className="font-light text-lg">Output: </p>
-                        <code>{question.output}</code>
-                        <br />
+                        <hr className="border border-[#232333] mb-2"></hr>
+
+                        <LabelledCode label="Input:" copyButton={true}>{question.input}</LabelledCode>
+                        <LabelledCode label="Output:" copyButton={false}>{question.output}</LabelledCode>
+
                         <div className={`flex justify-end ${!isRevealed ? "pb-10" : ""}`}>
                         { !isRevealed && 
                         <button 
@@ -370,13 +340,13 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
                         
 
                         </div> } 
-                </div>
+                </motion.div>
             }
-            </AnimateHeight>
+            </motion.div>
             
           
        
-            
+            </AnimatePresence>
         </>
     );
 }

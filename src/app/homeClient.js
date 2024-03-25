@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import DropDown from "./Components/DropDown";
+import DropDown, { DropDownAnimated } from "./Components/DropDown";
 import { LanguageButton } from "./Components/LanguageButton";
 import NewQuestion from "./Components/NewQuestion";
 
@@ -32,7 +32,13 @@ export default function HomeClient() {
             className={`w-full  mb-6 p-1 pt-5`}>
                 <article>
                 <nav className="md:mx-10 mb-10">
-                    <DropDown options={["Easy" ,"Medium", "Hard"]} 
+                    {/* <DropDown options={["Easy" ,"Medium", "Hard"]} 
+                    closeOnSelect={true}
+                    defaultOption="Easy"
+                    onSelect={(option) =>{
+                        updateDifficulty(option);
+                    } } /> */}
+                   <DropDownAnimated options={["Easy" ,"Medium", "Hard"]} 
                     closeOnSelect={true}
                     defaultOption="Easy"
                     onSelect={(option) =>{
