@@ -91,7 +91,7 @@ export default function Snip() {
             <div className="absolute top-0 left-0 p-5">
                 <BackHomebutton></BackHomebutton>
             </div>
-            <section className="flex flex-col justify-center items-center">
+            <section className="flex flex-col justify-center items-center w-[100%] md:w-[60%] 2xl:w-[40%]">
                 <div className="background-svg-snip bg-[length:200%] md:bg-[length:110%]" />
                 <div className={`w-full mt-14 ${modalOpen ? "blur-sm" : ""}`}
                 style={{  }}>

@@ -13,7 +13,7 @@ const item = {
   }
 
   const container = {
-    hidden: { height: "auto", width: 50 },
+    hidden: { height: 50, width: 50 },
     show: {
       height: "auto",
       width: "auto",
@@ -27,7 +27,7 @@ const item = {
   
   
 
-export function MobileDropDownButton({ onClick, title, highlight }) {
+export function MobileDropDownButton({ onClick, title, highlight, hightlightColour = "bg-indigo-500", outlineStyling }) {
 
     return (
         <motion.li
@@ -35,7 +35,7 @@ export function MobileDropDownButton({ onClick, title, highlight }) {
         >
             <button
             onClick={onClick}
-            className={`px-5 font-semibold text-left w-full h-12 my-[2px] rounded-lg ${highlight ? "bg-indigo-500 border-indigo-800" : "bg-[#13131d] border-slate-800"}`}>
+            className={`px-5 font-semibold text-left w-full h-12 my-[2px] rounded-lg ${outlineStyling} ${highlight ? hightlightColour : "bg-[#13131d"}`}>
                 <h1>{title}</h1>
             </button>
         </motion.li>
@@ -46,7 +46,7 @@ export function MobileDropDownDividor() {
     return (
         <motion.li 
         variants={item}
-        className="mx-2 my-1 border-[1px] border-slate-800 rounded-lg"/>
+        className="mx-2 my-2 border-[1px] border-[#232333] rounded-lg"/>
     )
 }
 
@@ -63,7 +63,7 @@ export default function MobileDropDownNav({ children, visible }) {
     );
 }
 
-export function MobileDropDownNavWithButton({ children }) {
+export function MobileDropDownNavWithButton({ children, borderStyling }) {
 
     const [ open, setOpen ] = useState(false);
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
@@ -71,9 +71,10 @@ export function MobileDropDownNavWithButton({ children }) {
     return (
         <OutsideClick onClickOutside={() => setOpen(false) }>
             <motion.ol
+            initial={ "hidden" }
             animate={ open ? "show" : "hidden"}
             variants={container}
-            className={`overflow-hidden m-5 bg-[#13131d] border-2 rounded-xl border-indigo-500`}>
+            className={`overflow-hidden m-5 shadow-lg shadow-black bg-[#13131d] rounded-xl ${borderStyling}`}>
                 <button disabled={isButtonDisabled} onClick={ async () => {  
 
                         setOpen(!open);
