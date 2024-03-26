@@ -209,7 +209,6 @@ export default function UserNav() {
             <section className="w-full 2xl:w-[50%] mx-auto">
                 <div className="p-5 mx-7 md:flex flex-row justify-between items-center gap-2 hidden">
                     <div className="flex flex-row gap-10">
-                        <NavButton name="Roadmap" location="/educators" />
                         <NavButton name="Educators" location="/educators" />
                         
                     </div>
@@ -224,6 +223,7 @@ export default function UserNav() {
                     }
                     </div>
                 </div>
+                
             </section>
         </>
     );

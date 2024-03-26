@@ -26,8 +26,8 @@ export default async function Home() {
                     </span>
                   </h1>
                 
-                  <h2 className="md:text-xl text-lg mt-8 text-slate-300 font-light">Select a difficulty and a language and start coding!</h2>
-                 
+                  <h2 className="md:text-xl text-lg mt-8 text-slate-300 font-light">Select a difficulty and a language and start coding!<br />No sign up needed, just code. </h2>
+
                 </header>
 
                 <HomeClient />
@@ -42,7 +42,7 @@ export default async function Home() {
               <h3 className="mt-5 font-light md:text-xl text-slate-300 text-lg">
                 Take on a fresh challenge daily that isn&apos;t in the main question pool.
               </h3>
-              <p className="mt-3 text-slate-300 font-light">Questions are new for the day then get added to the question pool so you can always come back to it later.</p>
+              <p className="mt-3 text-slate-300 font-light text-lg md:text-xl">Questions are new for the day then get added to the question pool so you can always come back to it later.</p>
             </section>
             
             <section className="mt-10 mb-10 flex flex-row justify-center items-center">

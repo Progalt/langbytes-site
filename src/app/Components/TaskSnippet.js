@@ -308,7 +308,7 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
                         <LabelledCode label="Input:" copyButton={true}>{question.input}</LabelledCode>
                         <LabelledCode label="Output:" copyButton={false}>{question.output}</LabelledCode>
 
-                        <div className={`flex justify-end ${!isRevealed ? "pb-10" : ""}`}>
+                        <div className={`flex justify-end ${!isRevealed ? "" : ""}`}>
                         { !isRevealed && 
                         <button 
                         onClick={() => {
