@@ -7,66 +7,6 @@ import { createClient } from "../utils/supabase/client";
 import NavButton from "./NavButton";
 import { HiMenu, HiOutlineX  } from "react-icons/hi";
 import MobileDropDownNav, { MobileDropDownButton, MobileDropDownDividor, MobileDropDownNavWithButton } from "./MobileDropDown";
-import OutsideClick from "./OutsideClick";
-import { BasicButton } from "./BevelledButton";
-
-function SignInButton() {
-    const router = useRouter();
-
-    return (
-        <button onClick={ async () => {
-
-        
-            router.push("/signin");
-
-
-            }} className="w-28 flex flex-row items-center justify-center rounded-lg bg-brand-500 border-brand-400 hover:bg-brand-400 hover:border-brand-300 border-2   p-2 px-6 transition-color duration-200">
-
-            <h1 className="font-semibold">Sign In</h1>  
-    
-        </button>
-           
-    );
-}
-
-function RegisterButton() {
-    const router = useRouter();
-
-    return (
-        <button onClick={ async () => {
-
-
-            router.push("/signin?t=register");
-
-
-            }} className="w-28 flex flex-row items-center justify-center rounded-lg bg-[#13131d] border-2 border-[#232333] hover:bg-[#232333] hover:border-[#2b2b3d] p-[2px] transition-all duration-200">
-            
-            
-                <h1 className="font-semibold">Register</h1>  
-    
-        </button>
-           
-    );
-}
-
-function AccountButton() { 
-
-    const router = useRouter();
-
-    return (
-        <button onClick={ async () => {
-
-                
-            router.push("/account");
-
-
-            }} className="w-28 flex flex-row items-center justify-center rounded-lg bg-brand-500 border-brand-400 hover:bg-brand-400 hover:border-brand-300 border-2   p-2 px-6 transition-color duration-200">
-
-                <h1 className="font-semibold">Account</h1>  
-            
-        </button>
-    );
-}
 
 export function NavBarButton({ route, highlighted, text}) {
     const router = useRouter();
