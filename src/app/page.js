@@ -12,7 +12,7 @@ export default async function Home() {
 
   return (
     <main className="w-full min-h-screen flex flex-col relative">
-      <div className="background-svg opacity-40 md:opacity-30 bg-[length:200%] md:bg-[length:100%] lg:bg-[length:80%] xl:bg-[length:50%]" />
+      <div className="background-svg opacity-40 md:opacity-50 bg-[length:200%] md:bg-[length:100%] lg:bg-[length:80%] xl:bg-[length:50%]" />
       <UserNav/>
       <div className="flex flex-col flex-grow justify-between transition-transform duration-150">
         <section className="px-5 md:mt-14 w-full flex flex-col justify-start items-center">
@@ -22,7 +22,7 @@ export default async function Home() {
                 <header className=" mt-10 md:mb-14">
                   <h1 className="text-4xl md:text-6xl font-semibold">
                     Quickly get <br />problems to test <br />your
-                    <span className={"font-extrabold text-indigo-500 bg-gradient-to-tl from-fuchsia-500 to-indigo-500 text-transparent bg-clip-text"}> coding skills.
+                    <span className={"font-extrabold text-brand-500 bg-gradient-to-t from-emerald to-brand-500 text-transparent bg-clip-text"}> coding skills.
                     </span>
                   </h1>
                 
@@ -46,19 +46,15 @@ export default async function Home() {
             </section>
             
             <section className="mt-10 mb-10 flex flex-row justify-center items-center">
-              <div className="border-2 border-slate-800 rounded-xl shadow-[0_0_20px_0] shadow-indigo-500/50 p-2 px-8 bg-[#13131d] font-semibold">Coming Soon</div>
+              <div className="border-2 border-slate-800 rounded-xl shadow-[0_0_20px_0] shadow-brand-500/50 p-2 px-8 bg-[#13131d] font-semibold">Coming Soon</div>
             </section>
           </article>
-
-          <section>
-            
-          </section>
 
         </section>
       <footer className="flex-shrink-0 mb-4 mt-4">
           <section className="flex flex-row justify-center items-center">
             <p className="text-slate-500">You can view the source on</p>
-            <a href="https://github.com/Progalt/portfolio-react" target="_blank" className="ml-1 text-indigo-400 hover:text-white transition-all duration-150">Github</a>
+            <a href="https://github.com/Progalt/portfolio-react" target="_blank" className="ml-1 text-brand-400 hover:text-white transition-all duration-150">Github</a>
           </section>
           <p className="mt-3 flex flex-row justify-center items-center text-slate-500 text-sm">Copyright © 2024, Henry Gronow</p>
         </footer>

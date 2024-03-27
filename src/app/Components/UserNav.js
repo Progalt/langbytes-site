@@ -20,7 +20,7 @@ function SignInButton() {
             router.push("/signin");
 
 
-            }} className="w-28 flex flex-row items-center justify-center rounded-lg bg-indigo-500 border-indigo-400 hover:bg-indigo-400 hover:border-indigo-300 border-2   p-2 px-6 transition-color duration-200">
+            }} className="w-28 flex flex-row items-center justify-center rounded-lg bg-brand-500 border-brand-400 hover:bg-brand-400 hover:border-brand-300 border-2   p-2 px-6 transition-color duration-200">
 
             <h1 className="font-semibold">Sign In</h1>  
     
@@ -60,9 +60,27 @@ function AccountButton() {
             router.push("/account");
 
 
-            }} className="w-28 flex flex-row items-center justify-center rounded-lg bg-indigo-500 border-indigo-400 hover:bg-indigo-400 hover:border-indigo-300 border-2   p-2 px-6 transition-color duration-200">
+            }} className="w-28 flex flex-row items-center justify-center rounded-lg bg-brand-500 border-brand-400 hover:bg-brand-400 hover:border-brand-300 border-2   p-2 px-6 transition-color duration-200">
 
                 <h1 className="font-semibold">Account</h1>  
+            
+        </button>
+    );
+}
+
+export function NavBarButton({ route, highlighted, text}) {
+    const router = useRouter();
+
+    return (
+        <button onClick={ async () => {
+
+                
+            router.push(route);
+
+
+            }} className={`w-28 flex flex-row items-center justify-center rounded-lg ${highlighted ? "bg-brand-500 border-brand-400 hover:bg-brand-400 hover:border-brand-300" : "bg-[#13131d] border-2 border-[#232333] hover:bg-[#232333] hover:border-[#2b2b3d]" }  border-2   p-2 px-6 transition-color duration-200`}>
+
+                <h1 className="font-semibold">{text}</h1>  
             
         </button>
     );
@@ -94,65 +112,6 @@ export default function UserNav() {
     return (
         <>
             <div className=" md:hidden">
-                {/* <nav className="p-5 pb-2 flex flex-row justify-end items-center">
-                <button onClick={ async () => {                
-                        setShowDropDownMenu(!showDropDownMenu);
-                    }} className="flex flex-row items-center justify-center rounded-lg border-indigo-500 border-2 hover:bg-indigo-500 bg-[#13131d] p-2 transition-all duration-200 hover:shadow-[0_0_30px_0px] hover:shadow-indigo-500/50">
-
-                        { !showDropDownMenu && <HiMenu className="text-3xl"/> }
-                        { showDropDownMenu && <HiOutlineX  className="text-3xl"/> }
-
-                    </button>
-                </nav>
-                {
-                     // We want to display a drop down menu here
-                    <OutsideClick onClickOutside={() => { setShowDropDownMenu(false); }}>
-                       <MobileDropDownNav visible={showDropDownMenu}>
-                            <MobileDropDownButton 
-                            visible={showDropDownMenu}
-                            onClick={() => {
-                                
-                            }}
-                            title="Educators"
-                            highlight={false}
-                            />
-                            {
-                                !userSignedIn && 
-                                <>
-                                    <MobileDropDownDividor />
-                                    <MobileDropDownButton 
-                                    visible={showDropDownMenu}
-                                    onClick={() => {
-                                        router.push("/signin?t=register");
-                                    }}
-                                    title="Register"
-                                    highlight={false}
-                                    />
-                                    <MobileDropDownButton 
-                                    visible={showDropDownMenu}
-                                    onClick={() => {
-                                        router.push("/signin");
-                                    }}
-                                    title="Sign In"
-                                    highlight={true}
-                                    />
-                                </>
-                            }
-                            {
-                                userSignedIn && 
-                                <MobileDropDownButton 
-                                visible={showDropDownMenu}
-                                onClick={() => {
-                                    router.push("/account");
-                                }}
-                                title="Account"
-                                highlight={true}
-                                />
-                            }
-                            
-                       </MobileDropDownNav>
-                    </OutsideClick>
-                } */}
                 <MobileDropDownNavWithButton borderStyling="border-2 border-[#232333]">
                     <MobileDropDownButton 
                     onClick={() => {
@@ -186,8 +145,8 @@ export default function UserNav() {
                             }}
                             title="Sign In"
                             highlight={true}
-                            hightlightColour="bg-indigo-500"
-                            outlineStyling="border-2 border-indigo-400"
+                            hightlightColour="bg-brand-500"
+                            outlineStyling="border-2 border-brand-400"
                             />
                         </>
                     }
@@ -200,7 +159,7 @@ export default function UserNav() {
                             }}
                             title="Account"
                             highlight={true}
-                            outlineStyling="border-2 border-indigo-400"
+                            outlineStyling="border-2 border-brand-400"
                             />
                         </>
                     }
@@ -214,12 +173,13 @@ export default function UserNav() {
                     </div>
                     <div className="flex-shrink-0 flex flex-row gap-2 h-10">
                     { !userSignedIn && <>
-                        <SignInButton />
-                        <RegisterButton />
+                        
+                        <NavBarButton highlighted={true} route="/signin" text="Sign In"/>
+                        <NavBarButton highlighted={false} route="/signin?t=register" text="Register"/>
                     </> }
                     {
                         userSignedIn && 
-                        <AccountButton />
+                        <NavBarButton highlighted={true} route="/accpunt" text="Account"/>
                     }
                     </div>
                 </div>
