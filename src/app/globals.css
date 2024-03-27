@@ -5,7 +5,8 @@
 :root {
   --foreground-rgb: 255, 255, 255;
   /* /--background-rgb: #1B1725; */
-  --background-rgb: #04080F
+  /* --background-rgb: #04080F */
+  --background-rgb: #000000 
 }
 
 

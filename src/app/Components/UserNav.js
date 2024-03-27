@@ -18,7 +18,7 @@ export function NavBarButton({ route, highlighted, text}) {
             router.push(route);
 
 
-            }} className={`w-28 flex flex-row items-center justify-center rounded-lg ${highlighted ? "bg-brand-500 border-brand-400 hover:bg-brand-400 hover:border-brand-300" : "bg-[#13131d] border-2 border-[#232333] hover:bg-[#232333] hover:border-[#2b2b3d]" }  border-2   p-2 px-6 transition-color duration-200`}>
+            }} className={`w-28 border-2 shadow-lg shadow-black flex flex-row items-center justify-center rounded-xl ${highlighted ? "bg-brand-500 border-brand-300 hover:bg-brand-400 hover:border-brand-300" : "bg-[#13131d] border-[#232333] hover:bg-[#232333] hover:border-[#2b2b3d]" }   p-2 px-6 transition-color duration-200`}>
 
                 <h1 className="font-semibold">{text}</h1>  
             
@@ -106,9 +106,8 @@ export default function UserNav() {
                 </MobileDropDownNavWithButton>
             </div>
             <section className="w-full 2xl:w-[50%] mx-auto">
-                <div className="p-5 mx-7 md:flex flex-row justify-between items-center gap-2 hidden">
+                <div className="p-3 mx-7 md:flex flex-row justify-between items-center gap-2 hidden">
                     <div className="flex flex-row gap-10">
-                        <NavButton name="Educators" location="/educators" />
                         
                     </div>
                     <div className="flex-shrink-0 flex flex-row gap-2 h-10">
