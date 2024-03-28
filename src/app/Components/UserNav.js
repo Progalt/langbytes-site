@@ -18,7 +18,7 @@ export function NavBarButton({ route, highlighted, text}) {
             router.push(route);
 
 
-            }} className={`w-28 border-2 shadow-lg shadow-black flex flex-row items-center justify-center rounded-xl ${highlighted ? "bg-brand-500 border-brand-300 hover:bg-brand-400 hover:border-brand-300" : "bg-[#13131d] border-[#232333] hover:bg-[#232333] hover:border-[#2b2b3d]" }   p-2 px-6 transition-color duration-200`}>
+            }} className={`w-28 border-2 shadow shadow-black flex flex-row items-center justify-center rounded-xl ${highlighted ? "bg-brand-500 border-brand-300 hover:bg-brand-400 hover:border-brand-300" : "bg-dark-brand-500 border-dark-brand-400 hover:bg-dark-brand-400 hover:border-dark-brand-300" }   p-2 px-6 transition-color duration-200`}>
 
                 <h1 className="font-semibold">{text}</h1>  
             

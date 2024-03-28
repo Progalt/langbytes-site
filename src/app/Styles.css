@@ -83,7 +83,7 @@
 
 
 .bg-gradient-mobile {
-  background: radial-gradient(circle at top right , #52aef4a6 0, transparent 40%),
+  background: radial-gradient(circle at top left , #52aef4a6 0, transparent 40%),
               /* radial-gradient(circle at 90% 45% , #b352afa6 0, transparent 50%), */
               radial-gradient(circle at bottom center, #FF705Ba6 0, transparent 40%);
 }

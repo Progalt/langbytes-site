@@ -111,12 +111,12 @@ export function DropDownAnimated({ options, onSelect, defaultOption = "", closeO
             initial={ "hidden" }
             animate={ open ? "show" : "hidden"}
             variants={container}
-            className={`font-semibold overflow-hidden m-5 shadow-lg shadow-black bg-[#13131d] rounded-xl border-2 border-[#232333]`}>
+            className={`font-semibold overflow-hidden m-5 shadow-lg shadow-black bg-dark-brand-500 rounded-xl border-2 border-dark-brand-400`}>
                 <button onClick={ () => {  
 
                         setOpen(!open);
                         console.log("open");
-                        }} className="w-full rounded-lg bg-[#13131d] p-3">
+                        }} className="w-full rounded-lg bg-dark-brand-500 p-3">
 
                         <div className="flex flex-row items-center gap-2">
                             <FaAngleRight className={`transition-all duration-150 ${open ? "rotate-90" : ""}`}/>
@@ -136,7 +136,7 @@ export function DropDownAnimated({ options, onSelect, defaultOption = "", closeO
                         <motion.div 
                         variants={item}
                         key={value} onClick={() => {onClickHandler(value);}}
-                        className={`w-full px-10 py-2 text-left hover:bg-[#1b1b29]`}>
+                        className={`w-full px-10 py-2 text-left hover:bg-dark-brand-400`}>
                             {value}
                         </motion.div>
                         );
