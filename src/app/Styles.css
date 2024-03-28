@@ -56,6 +56,18 @@
     background-repeat: no-repeat;
   }
 
+.background-svg-dots {
+  position: absolute; /* Change to fixed to make it position relative to the viewport */
+  top: 0%; /* Position it at the top */
+  left: 0%; /* Position it at the left */
+  width: 100%; /* Make it cover the entire width of the viewport */
+  height: 100%; /* Make it cover the entire height of the viewport */
+  z-index: -1; /* Ensure it stays behind other content */
+  background-image: url('/ooorganize.svg'); /* URL to your SVG file */
+  /* background-size: 100%;  */
+  background-position: center;
+}
+
 .background-svg-snip {
   position: absolute; /* Change to fixed to make it position relative to the viewport */
   top: 0; /* Position it at the top */
@@ -67,4 +79,11 @@
   /* background-size: 100%;  */
   background-position: center;
   opacity: 0.25;
+}
+
+
+.bg-gradient-mobile {
+  background: radial-gradient(circle at top right , #52aef4a6 0, transparent 40%),
+              /* radial-gradient(circle at 90% 45% , #b352afa6 0, transparent 50%), */
+              radial-gradient(circle at bottom center, #FF705Ba6 0, transparent 40%);
 }

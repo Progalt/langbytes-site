@@ -27,7 +27,7 @@ const item = {
   
   
 
-export function MobileDropDownButton({ onClick, title, highlight, hightlightColour = "bg-indigo-500", outlineStyling }) {
+export function MobileDropDownButton({ onClick, title, highlight, hightlightColour = "bg-brand-500", outlineStyling }) {
 
     return (
         <motion.li
