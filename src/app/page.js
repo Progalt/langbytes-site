@@ -13,19 +13,18 @@ const sourceCodePro = Source_Code_Pro({
 
 export default async function Home() {
 
-  const supabase = createClient();
-
   return (
-    <main className="w-full min-h-screen flex flex-col relative">
-      <div className="background-svg opacity-40 md:opacity-50 bg-[length:200%] md:bg-[length:100%] lg:bg-[length:80%] xl:bg-[length:50%]" />
+    <main className="bg-gradient-mobile w-full min-h-screen flex flex-col relative">
+      {/* <div className="background-svg opacity-40 md:opacity-50 bg-[length:200%] md:bg-[length:100%] lg:bg-[length:80%] xl:bg-[length:50%]" /> */}
       <nav className="hidden md:block w-full top-0 sticky backdrop-blur-xl backdrop-saturate-150 z-50">
         <UserNav/>
+        <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#232333]"/>
       </nav>
-      <nav className="relative md:hidden">
+      <nav className=" md:hidden absolute w-full">
         <UserNav />
       </nav>
 
-      <div className="flex flex-col flex-grow justify-between transition-transform duration-150">
+      <div className="mt-12 md:mt-0 flex flex-col flex-grow justify-between transition-transform duration-150">
         <section className="w-full flex flex-col justify-start items-center">
           
           <section className="px-5 w-full md:w-[80%] lg:w-[70%] 2xl:w-[40%]">
@@ -63,10 +62,10 @@ export default async function Home() {
         </section>
       <footer className="flex-shrink-0 mb-4 mt-4">
           <section className="flex flex-row justify-center items-center">
-            <p className="text-slate-500">You can view the source on</p>
-            <a href="https://github.com/Progalt/portfolio-react" target="_blank" className="ml-1 text-brand-400 hover:text-white transition-all duration-150">Github</a>
+            <p className="text-slate-300">You can view the source on</p>
+            <a href="https://github.com/Progalt/portfolio-react" target="_blank" className="ml-1 text-[#FF705B] hover:text-white transition-all duration-150">Github</a>
           </section>
-          <p className="mt-3 flex flex-row justify-center items-center text-slate-500 text-sm">Copyright © 2024, Henry Gronow</p>
+          <p className="mt-3 flex flex-row justify-center items-center text-slate-300 text-sm">Copyright © 2024, Henry Gronow</p>
         </footer>
       </div>
      
