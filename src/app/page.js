@@ -4,12 +4,15 @@ import HomeClient from "./homeClient";
 
 import { Source_Code_Pro } from 'next/font/google'
 import { createClient } from "./utils/supabase/server";
+import Card, { CardDescription, CardHeader, CardTitle } from "./progui/Card";
 
 const sourceCodePro = Source_Code_Pro({
   subsets: ['latin'],
 })
  
-
+function Dividor() {
+  return <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#232333]"/>;
+}
 
 export default async function Home() {
 
@@ -18,7 +21,7 @@ export default async function Home() {
       {/* <div className="background-svg opacity-40 md:opacity-50 bg-[length:200%] md:bg-[length:100%] lg:bg-[length:80%] xl:bg-[length:50%]" /> */}
       <nav className="hidden md:block w-full top-0 sticky backdrop-blur-xl backdrop-saturate-150 z-50">
         <UserNav/>
-        <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#232333]"/>
+        <Dividor />
       </nav>
       <nav className=" md:hidden absolute w-full">
         <UserNav />
@@ -43,9 +46,8 @@ export default async function Home() {
                 <HomeClient />
                         
               </section>
-
             
-            <section className="mt-20">
+            <section id="challenge" className="mt-20">
               <div className="mb-2 text-center w-36 py-1 rounded-full bg-[#FF705B]/20 text-[#FF705B] text-sm">Fancy a challenge?</div>
               <h2 className="text-3xl md:text-4xl font-semibold">Complete a <span className="font-extrabold  bg-gradient-to-tl from-[#FFB457] to-[#FF705B] text-transparent bg-clip-text">Daily challenge.</span></h2>
               <h3 className="mt-5 md:text-xl text-slate-300 text-lg">
@@ -60,7 +62,7 @@ export default async function Home() {
           </section>
 
         </section>
-      <footer className="flex-shrink-0 mb-4 mt-4">
+      <footer className="flex-shrink-0 mb-6 mt-6">
           <section className="flex flex-row justify-center items-center">
             <p className="text-slate-300">You can view the source on</p>
             <a href="https://github.com/Progalt/portfolio-react" target="_blank" className="ml-1 text-[#FF705B] hover:text-white transition-all duration-150">Github</a>
