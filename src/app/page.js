@@ -17,7 +17,6 @@ export default async function Home() {
 
   return (
     <main className="w-full min-h-screen flex flex-col relative">
-      {/* Maybe make a way for the background to glow  */}
       <div className="background-svg opacity-40 md:opacity-50 bg-[length:200%] md:bg-[length:100%] lg:bg-[length:80%] xl:bg-[length:50%]" />
       <nav className="hidden md:block w-full top-0 sticky backdrop-blur-xl backdrop-saturate-150 z-50">
         <UserNav/>
