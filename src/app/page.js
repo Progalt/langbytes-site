@@ -4,6 +4,7 @@ import HomeClient from "./homeClient";
 import Locked from "./progui/Locked";
 import { BiShare } from "react-icons/bi";
 import { MdFavorite } from "react-icons/md";
+import Badge from "./progui/Badge";
 
  
 function Dividor() {
@@ -36,7 +37,6 @@ export default async function Home() {
                 </h1>
               
                 <h2 className="md:text-xl text-lg mt-8 text-slate-300">Select a difficulty and a language and start coding!<br />No sign up needed, just code. </h2>
-
               </header>
 
               <HomeClient />
@@ -45,7 +45,7 @@ export default async function Home() {
 
             
             <section id="challenge" className="mt-20">
-              <div className="mb-2 text-center w-36 py-1 rounded-full bg-[#FF705B]/20 text-[#FF705B] text-sm">Fancy a challenge?</div>
+              <Badge name="Fancy a challenge?" colour="green" className="bg-[#FF705B]/20 text-[#FF705B] border-[#FF705B] mb-2" />
               <h2 className="text-3xl md:text-4xl font-semibold">Complete a <span className="font-extrabold  bg-gradient-to-tl from-[#FFB457] to-[#FF705B] text-transparent bg-clip-text">Daily challenge.</span></h2>
               <h3 className="mt-5 md:text-xl text-slate-300 text-lg">
                 Take on a fresh challenge daily that isn&apos;t in the main question pool.
