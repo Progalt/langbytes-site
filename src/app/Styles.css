@@ -81,9 +81,21 @@
   opacity: 0.25;
 }
 
+.bg-gradient-base {
+  background: radial-gradient(circle at bottom center, #ff715b50 0, transparent 40%);
+}
+
+.bg-gradient-main {
+  background: radial-gradient(circle at 0% 25% , #2799f15e 0, transparent 40%),
+    radial-gradient(circle at 80% 55% , #f127f13f 0, transparent 50%);
+}
 
 .bg-gradient-mobile {
-  background: radial-gradient(circle at top left , #52aef4a6 0, transparent 40%),
+  background: radial-gradient(circle at top left , #279AF1 0, transparent 40%),
               /* radial-gradient(circle at 90% 45% , #b352afa6 0, transparent 50%), */
               radial-gradient(circle at bottom center, #FF705Ba6 0, transparent 40%);
+}
+
+.gradient-nav {
+  background: radial-gradient(circle at bottom center , #2799f1a8 0, transparent 70%);
 }

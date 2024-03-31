@@ -8,11 +8,13 @@ import NavButton from "./NavButton";
 import { HiMenu, HiOutlineX  } from "react-icons/hi";
 import MobileDropDownNav, { MobileDropDownButton, MobileDropDownDividor, MobileDropDownNavWithButton } from "./MobileDropDown";
 import Button from "../progui/Button";
+import { IoLogoGithub } from "react-icons/io5";
+import Link from "next/link";
 
 export function NavBarButton({ route, highlighted, text}) {
 
     return (
-        <Button href={route} className={highlighted ? "bg-brand-500 border-brand-400 hover:bg-brand-400 hover:border-brand-300 text-white" : ""}>
+        <Button href={route} className={highlighted ? "bg-brand-500 border-brand-300 hover:bg-brand-400 text-white" : ""}>
 
               {text}  
             
@@ -105,6 +107,10 @@ export default function UserNav() {
                         
                     </div>
                     <div className="flex-shrink-0 flex flex-row gap-2 h-10">
+                        <Link href="https://github.com/Progalt/langbytes-site"
+                        className="text-4xl mx-4 text-slate-700 hover:text-slate-500 transition-colors duration-150">
+                            <IoLogoGithub />
+                        </Link>
                     { !userSignedIn && <>
                         
                         <NavBarButton highlighted={true} route="/signin" text="Sign In"/>
@@ -112,7 +118,7 @@ export default function UserNav() {
                     </> }
                     {
                         userSignedIn && 
-                        <NavBarButton highlighted={true} route="/accpunt" text="Account"/>
+                        <NavBarButton highlighted={true} route="/account" text="Account"/>
                     }
                     </div>
                 </div>

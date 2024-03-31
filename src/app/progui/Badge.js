@@ -12,7 +12,7 @@ export default function Badge({ name, colour, className }) {
     return (
         <div 
         className={cn(
-            "inline-block rounded-full py-1 px-4 text-sm",
+            "inline-block items-center justify-center rounded-full py-1 px-4 text-sm",
             c === "red" ? ("text-red-500 bg-red-500/30 border-red-500") : "",
             c === "blue" || c === "" ? ("text-blue-500 bg-blue-500/30 border-blue-500") : "",
             c === "green" ? ("text-green-500 bg-green-500/30 border-green-500") : "",
