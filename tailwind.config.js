@@ -54,13 +54,29 @@ module.exports = {
 
         'emerald': '#59CD90',
 
+        // 'dark-brand': { 
+        //   300: '#2b2b3d',
+        //   400: '#232333',
+        //   500: '#13131d',
+        //   600: '#0f0f17',
+        //   700: '#0b0b11',
+        // }
+
         'dark-brand': { 
-          300: '#2b2b3d',
-          400: '#232333',
-          500: '#13131d',
-          600: '#0f0f17',
-          700: '#0b0b11',
-        }
+          300: '#454545',
+          400: '#2d2d2d',
+          500: '#161616',
+          600: '#121212',
+          700: '#0b0b0b',
+        },
+
+        'background-base': '#000000',
+        'background': '#00000080',
+        // 'background': '#000000',
+        // Also used for borders
+        'background-hover': '#2d2d2d',
+        // 'code-background': '#141414',
+        'code-background': '#000000' 
   
       }
     },

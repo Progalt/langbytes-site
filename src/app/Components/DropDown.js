@@ -30,7 +30,7 @@ export default function DropDown({ options, onSelect, defaultOption = "", closeO
     return (
         <OutsideClick onClickOutside={() => { setOpen(false); }}>
             <section 
-            className="mx-2 relative bg-[#13131d] rounded-lg">
+            className="mx-2 relative bg-background rounded-lg">
                 <button disabled={isButtonDisabled}
                 onClick={() => {
                     
@@ -111,12 +111,12 @@ export function DropDownAnimated({ options, onSelect, defaultOption = "", closeO
             initial={ "hidden" }
             animate={ open ? "show" : "hidden"}
             variants={container}
-            className={`font-semibold overflow-hidden m-5 shadow-lg shadow-black bg-dark-brand-500 rounded-xl border-2 border-dark-brand-400`}>
+            className={`font-semibold overflow-hidden m-5 shadow-lg shadow-black bg-background rounded-xl border-2 border-dark-brand-400`}>
                 <button onClick={ () => {  
 
                         setOpen(!open);
                         console.log("open");
-                        }} className="w-full rounded-lg bg-dark-brand-500 p-3">
+                        }} className="w-full rounded-lg bg-background p-3">
 
                         <div className="flex flex-row items-center gap-2">
                             <FaAngleRight className={`transition-all duration-150 ${open ? "rotate-90" : ""}`}/>

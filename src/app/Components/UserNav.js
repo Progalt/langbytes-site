@@ -10,11 +10,17 @@ import MobileDropDownNav, { MobileDropDownButton, MobileDropDownDividor, MobileD
 import Button from "../progui/Button";
 import { IoLogoGithub } from "react-icons/io5";
 import Link from "next/link";
+import { cn } from "../progui/utils";
 
-export function NavBarButton({ route, highlighted, text}) {
+export function NavBarButton({ route, highlighted, text, className}) {
+
+    let styles = cn(
+        highlighted ? "bg-brand-500 border-[0px] border-brand-300 hover:bg-brand-300 text-white" : "",
+        className
+    )
 
     return (
-        <Button href={route} className={highlighted ? "bg-brand-500 border-brand-300 hover:bg-brand-400 text-white" : ""}>
+        <Button href={route} className={styles}>
 
               {text}  
             
@@ -107,18 +113,18 @@ export default function UserNav() {
                         
                     </div>
                     <div className="flex-shrink-0 flex flex-row gap-2 h-10">
-                        <Link href="https://github.com/Progalt/langbytes-site"
-                        className="text-4xl mx-4 text-slate-700 hover:text-slate-500 transition-colors duration-150">
+                        <Link target="_blank"  href="https://github.com/Progalt/langbytes-site"
+                        className="text-4xl mx-4 text-dark-brand-400 hover:text-white transition-colors duration-150">
                             <IoLogoGithub />
                         </Link>
                     { !userSignedIn && <>
                         
-                        <NavBarButton highlighted={true} route="/signin" text="Sign In"/>
-                        <NavBarButton highlighted={false} route="/signin?t=register" text="Register"/>
+                        <NavBarButton highlighted={true} route="/signin" text="Sign In" className="w-24"/>
+                        <NavBarButton highlighted={false} route="/signin?t=register" text="Register" className="w-24"/>
                     </> }
                     {
                         userSignedIn && 
-                        <NavBarButton highlighted={true} route="/account" text="Account"/>
+                        <NavBarButton highlighted={true} route="/account" text="Account" className="w-24"/>
                     }
                     </div>
                 </div>

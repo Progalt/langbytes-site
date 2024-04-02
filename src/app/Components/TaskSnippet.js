@@ -14,6 +14,7 @@ import { isSignedIn } from '../Backend/database';
 import { useRouter } from 'next/navigation';
 import LabelledCode from './LabelledCode';
 import { AnimatePresence, motion } from "framer-motion"
+import CodeSnippet from '../progui/CodeSnippet';
 
 export const knownLanguages = [
     "JavaScript",
@@ -333,9 +334,12 @@ export function TaskSnippet({ id, difficulty, selectedLanguages, onNotSignedIn }
                                     />
                                 ))}
                             </div>
-                            <SyntaxHighlighter language={selectedLanguageCode.toLowerCase()} style={dracula}>
+                            {/* <SyntaxHighlighter language={selectedLanguageCode.toLowerCase()} style={dracula}>
                                 {question.codeSnippets[selectedLanguageCode].trim()}
-                            </SyntaxHighlighter>
+                            </SyntaxHighlighter> */}
+                            <CodeSnippet className="mt-4" language={selectedLanguageCode.toLowerCase()}>
+                                {question.codeSnippets[selectedLanguageCode].trim()}
+                            </CodeSnippet>
 
                         
 

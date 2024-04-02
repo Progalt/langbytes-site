@@ -6,6 +6,8 @@ import { BiShare } from "react-icons/bi";
 import { MdFavorite } from "react-icons/md";
 import Badge from "./progui/Badge";
 import Container from "./progui/Container";
+import Card, { CardDescription, CardHeader, CardTitle } from "./progui/Card";
+import CodeSnippet from "./progui/CodeSnippet";
 
 
 export default async function Home() {
@@ -28,32 +30,41 @@ export default async function Home() {
             <section className="h-[calc(100vh_-_124px)] min-h-[650px]  flex flex-col justify-center items-start">
               <header className=" md:mb-14 overflow-visible">
                 {/* <Badge name="Handcrafted Questions" colour="blue" className="bg-brand-500/20 text-brand-500 mb-2"/> */}
-               
+                <Badge name="All handcrafted questions!" colour="blue" className="bg-brand-500/20 text-brand-500 mb-2"/>
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold">
                   Quickly get <br />problems to test <br />your
                   <span className={"font-extrabold text-brand-500 bg-gradient-to-r from-[#5DFDCB] to-brand-500 text-transparent bg-clip-text"}> coding skills.
                   </span>
                 </h1>
               
-                <h2 className="md:text-xl text-lg mt-8 text-slate-300">Select a difficulty and a language and start coding!<br />No sign up needed, just code. </h2>
+                
+                <h2 className="md:text-xl text-lg mt-10 text-slate-300">
+                  Select a difficulty and a language and start coding! 
+                </h2>
               </header>
 
               <HomeClient />
-
                       
             </section>
 
             
             <section id="challenge" className="mt-20">
               <Badge name="Fancy a challenge?" colour="green" className="bg-[#FF705B]/20 text-[#FF705B] border-[#FF705B] mb-2" />
-              <h2 className="text-3xl md:text-4xl font-semibold">Complete a <span className="font-extrabold  bg-gradient-to-r from-[#FFB457] to-[#FF705B] text-transparent bg-clip-text">Daily challenge.</span></h2>
-              <h3 className="mt-5 md:text-xl text-slate-300 text-lg">
-                Take on a fresh challenge daily that isn&apos;t in the main question pool.
-              </h3>
-              <p className="mt-3 text-slate-300 text-lg md:text-xl">Questions are new for the day then get added to the question pool so you can always come back to it later.</p>
+              <h2 className="text-3xl md:text-5xl font-semibold">Complete a <br /><span className="font-extrabold  bg-gradient-to-r from-[#FFB457] to-[#FF705B] text-transparent bg-clip-text">Daily challenge.</span></h2>
+              <h2 className="md:text-xl text-lg mt-6 text-slate-300">
+                  A new challenge everyday to keep your skills sharp!
+              </h2>
+              <CodeSnippet language="cpp">
+                {`#include <iostream>
+
+int main(int argc, char* argv[]) {
+  std::cout << "Hello World" << std::endl;
+  return 0;
+}`}
+              </CodeSnippet>
             </section>
             
-            
+           
             
             
           </section>
