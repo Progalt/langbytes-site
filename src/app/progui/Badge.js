@@ -13,9 +13,9 @@ export default function Badge({ name, colour, className }) {
         <div 
         className={cn(
             "inline-block items-center justify-center rounded-full py-1 px-4 text-sm",
-            c === "red" ? ("text-red-500 bg-red-500/30 border-red-500") : "",
-            c === "blue" || c === "" ? ("text-blue-500 bg-blue-500/30 border-blue-500") : "",
-            c === "green" ? ("text-green-500 bg-green-500/30 border-green-500") : "",
+            c === "red" ? ("text-red-500 bg-red-500/35 border-red-500") : "",
+            c === "blue" || c === "" ? ("text-blue-500 bg-blue-500/35 border-blue-500") : "",
+            c === "green" ? ("text-green-500 bg-green-500/35 border-green-500") : "",
             className
         )}>
             {name}

@@ -15,6 +15,12 @@ export default async function Home() {
   return (
     <main className="bg-gradient-base w-full min-h-screen flex flex-col relative">
       {/* <div className="background-svg opacity-40 md:opacity-50 bg-[length:200%] md:bg-[length:100%] lg:bg-[length:80%] xl:bg-[length:50%]" /> */}
+      <div className="absolute -z-50 h-full w-full dark:bg-black bg-white bg-grid-white/[0.15]">
+       
+        <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(circle_at_50%_30%,transparent_5%,black_50%)]"></div>
+       
+      </div >
+
       <nav className="hidden md:block absolute w-full top-0 z-50">
         <UserNav/>
       </nav>
@@ -24,14 +30,14 @@ export default async function Home() {
 
     
       <div className="flex flex-col flex-grow justify-between transition-transform duration-150">
-        <section className=" pt-12 w-full flex flex-col justify-start items-center">
+        <section className="mt-12 md:mt-0  pt-12 w-full flex flex-col justify-start items-center">
           
           <section className=" px-5 w-full md:w-[80%] lg:w-[70%] 2xl:w-[40%]">
             <section className="h-[calc(100vh_-_124px)] min-h-[650px]  flex flex-col justify-center items-start">
               <header className=" md:mb-14 overflow-visible">
                 {/* <Badge name="Handcrafted Questions" colour="blue" className="bg-brand-500/20 text-brand-500 mb-2"/> */}
-                <Badge name="All handcrafted questions!" colour="blue" className="bg-brand-500/20 text-brand-500 mb-2"/>
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold">
+                <Badge name="All handcrafted questions!" colour="blue" className="bg-brand-500/30 text-brand-500 mb-2"/>
+                <h1 className="text-4xl md:text-7xl lg:text-7xl font-semibold">
                   Quickly get <br />problems to test <br />your
                   <span className={"font-extrabold text-brand-500 bg-gradient-to-r from-[#5DFDCB] to-brand-500 text-transparent bg-clip-text"}> coding skills.
                   </span>
@@ -54,14 +60,7 @@ export default async function Home() {
               <h2 className="md:text-xl text-lg mt-6 text-slate-300">
                   A new challenge everyday to keep your skills sharp!
               </h2>
-              <CodeSnippet language="cpp">
-                {`#include <iostream>
 
-int main(int argc, char* argv[]) {
-  std::cout << "Hello World" << std::endl;
-  return 0;
-}`}
-              </CodeSnippet>
             </section>
             
            
@@ -80,7 +79,6 @@ int main(int argc, char* argv[]) {
         </footer>
       </div>
 
-     
     </main>
   );
 }  

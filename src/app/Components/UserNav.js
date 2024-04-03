@@ -54,7 +54,7 @@ export default function UserNav() {
     return (
         <>
             <div className=" md:hidden">
-                <MobileDropDownNavWithButton borderStyling="border-2 border-[#232333]">
+                <MobileDropDownNavWithButton borderStyling="border-2 border-background-hover">
                     <MobileDropDownButton 
                     onClick={() => {
                         

@@ -109,7 +109,7 @@ export function DropDownAnimated({ options, onSelect, defaultOption = "", closeO
         <OutsideClick onClickOutside={() => setOpen(false) }>
             <motion.ol
             initial={ "hidden" }
-            animate={ open ? "show" : "hidden"}
+            animate={ open ? "show" : "hidden" }
             variants={container}
             className={`font-semibold overflow-hidden m-5 shadow-lg shadow-black bg-background rounded-xl border-2 border-dark-brand-400`}>
                 <button onClick={ () => {  
@@ -127,6 +127,7 @@ export function DropDownAnimated({ options, onSelect, defaultOption = "", closeO
             
                 {
                     <motion.div
+                        initial={{ height: 0 }}
                         animate={{ height: open ? "auto" : 0}}
                         className={` flex flex-wrap`}>
                         <button className="w-full flex flex-col justify-start items-start">

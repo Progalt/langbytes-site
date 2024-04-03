@@ -46,7 +46,7 @@ export function MobileDropDownDividor() {
     return (
         <motion.li 
         variants={item}
-        className="mx-2 my-2 border-[1px] border-[#232333] rounded-lg"/>
+        className="mx-2 my-2 border-[1px] border-background-hover rounded-lg"/>
     )
 }
 
@@ -74,7 +74,7 @@ export function MobileDropDownNavWithButton({ children, borderStyling }) {
             initial={ "hidden" }
             animate={ open ? "show" : "hidden"}
             variants={container}
-            className={`overflow-hidden m-5 shadow-lg shadow-black bg-[#13131d] rounded-xl ${borderStyling}`}>
+            className={`overflow-hidden m-5 shadow-lg shadow-black bg-background rounded-xl ${borderStyling}`}>
                 <button disabled={isButtonDisabled} onClick={ async () => {  
 
                         setOpen(!open);

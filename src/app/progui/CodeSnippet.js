@@ -8,7 +8,7 @@ export default function CodeSnippet({ className, language = "", nobackground = f
 
     let styles = cn(
         "rounded-xl px-4 py-2",
-        nobackground === false ? "border-2 bg-code-background border-background-hover" : "",
+        nobackground === false ? " bg-background-hover" : "",
         language === "" ? "py-5 block overflow-x-auto" : "",
         className
     );
